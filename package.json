@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/Dragontalker/project-3/issues"
   },
-  "homepage": "https://github.com/Dragontalker/project-3#readme"
+  "homepage": "https://github.com/Dragontalker/project-3#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.2",
+    "morgan": "^1.10.0"
+  }
 }
