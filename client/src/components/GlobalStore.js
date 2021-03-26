@@ -1,16 +1,19 @@
 import { createContext, useReducer, useContext, useEffect } from "react"
 
 const initialData = {
-  winDim: {x:window.innerWidth, y:window.innerHeight}
+  winX:window.innerWidth, 
+  winY:window.innerHeight,
+  loggedIn:true,
+  username: "[User]"
 };
 
 /*! IMPORTANT all your reducer functionality goes here */
 const dataReducer = (state, action) => {
   switch (action.type) {
   case "resize":
-    return {...state, winDim:{x:window.innerWidth, y:window.innerHeight}};
-  case "echo":
-    return state;
+    return {...state, winX:window.innerWidth, winY:window.innerHeight};
+  case "logout":
+    return {...state, loggedIn:false};
   default:
     throw new Error(`Invalid action type: ${action.type}`);
   }
@@ -22,7 +25,9 @@ const StoreProvider = function(props){
   const [state, dispatch] = useReducer( dataReducer, initialData );
   useEffect(() => {
     // add listeners for window resize
-    window.addEventListener('resize', dispatch({type:"resize"}));
+    function handleResize() { dispatch({type:"resize"}) };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   })
   return <StoreContext.Provider value={[state, dispatch]} {...props} />;
 }

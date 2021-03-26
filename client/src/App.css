@@ -2,3 +2,8 @@ body {
   min-height: 100vh;
   background: linear-gradient(180deg, rgba(200,210,220,1) 0%, rgba(195,200,205,1) 70%, rgba(150,155,160,1) 100%);
 }
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
