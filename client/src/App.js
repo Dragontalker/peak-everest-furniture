@@ -10,18 +10,18 @@ function App() {
   return (
     <div className="App">
       <StoreProvider>
-      <Router>
-        <Navbar />
-        <div className="container-lg">
-          <Switch>
-            <Route exact path="/"><Shop /></Route>
-            <Route path="/register"><Register /></Route>
-            <Route path="/login"><Login /></Route>
-          </Switch>
-        </div>
-        {/* <ShoppingCart /> */}
-        {/* <Footer /> */}
-      </Router>
+        <Router>
+          <Navbar />
+          <div className="container-lg">
+            <Switch>
+              <Route exact path="/"><Shop /></Route>
+              <Route path="/register"><Register /></Route>
+              <Route path="/login"><Login /></Route>
+            </Switch>
+          </div>
+          {/* <ShoppingCart /> */}
+          {/* <Footer /> */}
+        </Router>
       </StoreProvider>
     </div>
   );
