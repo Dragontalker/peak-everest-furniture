@@ -9,7 +9,10 @@ app.use(cors());
 const PORT = process.env.PORT || 8080;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mernCommerce';
 
-
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
