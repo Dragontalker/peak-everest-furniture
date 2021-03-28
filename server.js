@@ -14,6 +14,10 @@ mongoose.connect(MONGODB_URI, {
     useUnifiedTopology: true
 });
 
+mongoose.connection.on('connected', () => {
+    console.log('==> 🌱  MongoDB is connected.');
+});
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
