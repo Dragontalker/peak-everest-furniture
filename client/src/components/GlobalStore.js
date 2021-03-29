@@ -4,7 +4,8 @@ const initialData = {
   winX:window.innerWidth, 
   winY:window.innerHeight,
   loggedIn:true,
-  username: "[User]"
+  username: "[User]",
+  shoppingcart: []
 };
 
 /*! IMPORTANT all your reducer functionality goes here */
