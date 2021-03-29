@@ -11,13 +11,13 @@ function Navbar() {
 
   function renderNavigation() {
     if (store.loggedIn) return(
-      <div class="navbar-nav">
+      <div className="navbar-nav">
         <NavLink exact to="/" className="nav-link" activeClassName="disabled">Home</NavLink>
         <button className="btn nav-link" onClick={handleLogout}>Logout</button>
       </div>
     )
     else return (
-      <div class="navbar-nav">
+      <div className="navbar-nav">
         <span className="nav-link text-muted">{store.winX}x{store.winY}</span>
         <NavLink exact to="/" className="nav-link" activeClassName="disabled">Home</NavLink>
         <NavLink to="/register" className="nav-link" activeClassName="disabled">Register</NavLink>
