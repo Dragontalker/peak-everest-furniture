@@ -37,7 +37,7 @@ npm run dev
   * Require email/password/display name
   * Send email on registration?
 ​
-* Login
+* -[ ] Login
   * OAuth2
   * Accounts will track products (i.e. shopping cart)
   * Profile page that tracks shopping cart/ongoing/delivered products (BONUS)
