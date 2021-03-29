@@ -2,10 +2,12 @@ import React from 'react';
 
 function RegisterPage() {
 
+  const style = {maxWidth: '500px',
+                minWidth: '300px'}
   return(
     <div class="row justify-content-center">
       <div class="col-4">
-        <form>
+        <form style={style}>
           <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username"/>

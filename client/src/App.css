@@ -18,7 +18,8 @@ body {
   white-space: nowrap;
   padding: 0.2rem 0.5rem;
   overflow-y: scroll;
-  background-color: rgb(173, 177, 219);
+  background-color: rgb(116, 117, 122);
+  color: rgb(244, 247, 250);
   z-index: 20;
   animation: sideopen 0.3s;
 }

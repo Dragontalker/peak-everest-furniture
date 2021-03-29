@@ -14,18 +14,23 @@ function Navbar() {
   }
 
   function renderNavigation() {
-    if (store.loggedIn) return(
+    if (store.winX > 800 && store.loggedIn) return(
       <div className="navbar-nav">
         <NavLink exact to="/" className="nav-link" activeClassName="disabled">Home</NavLink>
         <button className="btn nav-link" onClick={openShopCart}>Shopping Cart</button>
         <button className="btn nav-link" onClick={handleLogout}>Logout</button>
       </div>
     )
-    else return (
+    else if (store.winX > 800) return (
       <div className="navbar-nav">
         <NavLink exact to="/" className="nav-link" activeClassName="disabled">Home</NavLink>
         <NavLink to="/register" className="nav-link" activeClassName="disabled">Register</NavLink>
         <NavLink to="/login" className="nav-link" activeClassName="disabled">Login</NavLink>
+      </div>
+    )
+    else return (
+      <div className="navbar-nav">
+        <button className="btn nav-link active"><i class="fas fa-bars fa-lg"></i></button>
       </div>
     )
   }

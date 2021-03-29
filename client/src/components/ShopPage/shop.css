@@ -5,18 +5,17 @@
 
 .carousel-inner {
     width: 100%;
-    height: 500px;
+    max-height: 50vh;
 }
 
-img {
-    width: auto;
+.carousel-image {
     height: 500px;
 }
 
 .tales {
     width: 100%;
 }
-
+/* 
 p {
     color: white;
 }
@@ -24,3 +23,12 @@ p {
 h5{
     color: white
 }
+
+.card{
+    width: 18rem ;
+}
+
+.card-image{
+    width: 200px;
+    height: 200px;
+} */
