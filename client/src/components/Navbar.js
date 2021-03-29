@@ -30,7 +30,7 @@ function Navbar() {
     )
     else return (
       <div className="navbar-nav">
-        <button className="btn nav-link active"><i class="fas fa-bars fa-lg"></i></button>
+        <button className="btn nav-link"><i class="fas fa-bars fa-lg"></i></button>
       </div>
     )
   }

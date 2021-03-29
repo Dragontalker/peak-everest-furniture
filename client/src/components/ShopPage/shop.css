@@ -24,11 +24,11 @@
     color: white
 }
 
-.card{
+.all-products-list .card{
     width: 18rem ;
 }
 
-.card-image{
+.all-products-list .card-image{
     width: 200px;
     height: 200px;
 }

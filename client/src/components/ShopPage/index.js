@@ -1,7 +1,6 @@
 import "./shop.css"
 import { useEffect, useState } from 'react'
 
-
 function ShopPage() {
 
   // const [products, setProducts] = useState([])
@@ -48,9 +47,8 @@ function ShopPage() {
         </div>
       </div>
       <hr/>
-      <div>
+      <div className="all-products-list">
         <h1>All Products</h1>
-        <div class="card-body">
           <div class="row">
             {/* products.map( product => ) */}
             <div class="card">
@@ -76,9 +74,7 @@ function ShopPage() {
               </div>
             </div>
           </div>
-        </div>
       </div>
-        
     </>
   )
 }
