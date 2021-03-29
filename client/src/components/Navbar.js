@@ -10,7 +10,11 @@ function Navbar() {
   }
 
   function openShopCart() {
-    updateStore({type:"open-shop-cart"});
+    updateStore({type:"toggle-shop-cart"});
+  }
+
+  function openNavExt() {
+    updateStore({type:"toggle-nav-ext"});
   }
 
   function renderNavigation() {
@@ -30,13 +34,13 @@ function Navbar() {
     )
     else return (
       <div className="navbar-nav">
-        <button className="btn nav-link"><i class="fas fa-bars fa-lg"></i></button>
+        <button class="btn navbar-toggler-icon" onClick={openNavExt}></button>
       </div>
     )
   }
 
   return(
-    <nav className="navbar navbar-expand navbar-dark bg-dark">
+    <nav className="navbar navbar-expand navbar-dark bg-dark main-nav">
       <div className="container-fluid">
         {/* Logo/Branding */}
         <span className="navbar-brand">Peak Everest Furnitures</span>

@@ -10,7 +10,8 @@ const initialData = {
     {id:"product id", title:"product name", picture:noImg},
     {id:"product id2", title:"product name 2", picture:noImg}
   ],
-  openShopCart:false
+  openShopCart:false,
+  openNavExt:false
 };
 
 /*! IMPORTANT all your reducer functionality goes here */
@@ -20,8 +21,12 @@ const dataReducer = (state, action) => {
     return {...state, winX:window.innerWidth, winY:window.innerHeight};
   case "logout":
     return {...state, loggedIn:false};
-  case "open-shop-cart":
+  case "login":
+    return {...state, loggedIn:true};
+  case "toggle-shop-cart":
     return {...state, openShopCart: !state.openShopCart};
+  case "toggle-nav-ext":
+    return {...state, openNavExt: !state.openNavExt};
   default:
     throw new Error(`Invalid action type: ${action.type}`);
   }

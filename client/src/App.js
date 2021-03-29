@@ -5,6 +5,7 @@ import Shop from './components/ShopPage';
 import Register from './components/RegisterPage';
 import Login from './components/LoginPage';
 import ShoppingCart from './components/ShoppingCart';
+import NavbarExtension from './components/NavbarExtension';
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <StoreProvider>
         <Router>
           <Navbar />
+          <NavbarExtension />
           <div className="container-lg">
             <Switch>
               <Route exact path="/"><Shop /></Route>

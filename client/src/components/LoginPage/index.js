@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
+import { useStoreContext } from '../GlobalStore';
 import './login.css';
 
 function LoginPage() {
 
+  const [, setStore] = useStoreContext();
   const [showErr, setShowErr] = useState(false);
 
   const email = useRef(null);
@@ -12,6 +14,7 @@ function LoginPage() {
     e.preventDefault();
     console.log(`trying to login with email: ${email.current.value} & password: ${pw.current.value}`);
     setShowErr(true);
+    setStore({type:"login"});
   }
 
   return(
