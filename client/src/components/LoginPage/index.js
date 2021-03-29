@@ -1,14 +1,17 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import './login.css';
 
 function LoginPage() {
+
+  const [showErr, setShowErr] = useState(false);
 
   const email = useRef(null);
   const pw = useRef(null);
 
   function submitForm(e) {
     e.preventDefault();
-    console.log("trying to login");
+    console.log(`trying to login with email: ${email.current.value} & password: ${pw.current.value}`);
+    setShowErr(true);
   }
 
   return(
@@ -23,9 +26,10 @@ function LoginPage() {
           <div className="mb-3">
             <label htmlFor="passwordInput" className="form-label">Password</label>
             <input type="password" className="form-control" ref={pw} id="passwordInput" placeholder="********" />
+            {showErr ? <span className="login-err">Error: account not found</span> : ""}
           </div>
           <div className="text-center mb-3">
-            <button className="btn btn-primary">Login</button>
+            <button className="btn btn-dark">Login</button>
           </div>
         </form>
         <div className="text-center mb-3">

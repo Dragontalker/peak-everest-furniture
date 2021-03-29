@@ -1,12 +1,11 @@
 import React from 'react';
-const {Users} = require('../../../../app/db/models')
 
 function RegisterPage() {
 
   return(
     <div class="row justify-content-center">
       <div class="col-4">
-        <form style="max-width: 500px; min-width: 300px">
+        <form>
           <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username"/>

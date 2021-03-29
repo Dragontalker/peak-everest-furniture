@@ -2,3 +2,7 @@
   max-width: 680px;
   margin: 0 auto;
 }
+
+.login-err {
+  color: red;
+}
