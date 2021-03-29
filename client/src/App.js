@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Shop from './components/ShopPage';
 import Register from './components/RegisterPage';
 import Login from './components/LoginPage';
+import ShoppingCart from './components/ShoppingCart';
 import './App.css';
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
               <Route path="/login"><Login /></Route>
             </Switch>
           </div>
-          {/* <ShoppingCart /> */}
+          <ShoppingCart />
           {/* <Footer /> */}
         </Router>
       </StoreProvider>

@@ -7,3 +7,44 @@ body {
   outline: none;
   box-shadow: none;
 }
+
+.shop-cart-body {
+  position: absolute;
+  top: 3.6rem;
+  left: 0;
+  height: calc(100vh - 3.6rem);
+  min-width: 400px;
+  width: 30vw;
+  white-space: nowrap;
+  padding: 0.2rem 0.5rem;
+  overflow-y: scroll;
+  background-color: rgb(173, 177, 219);
+  z-index: 20;
+  animation: sideopen 0.3s;
+}
+
+.shop-cart-body img{
+  max-height: 100px;
+}
+
+.shop-cart-close {
+  animation: sideclose 0.3s;
+}
+
+@keyframes sideopen {
+  0% { min-width:0; width:0; opacity:0.5; }
+  100% { min-width:400px; width:30vw; opacity:1; }
+}
+
+@keyframes sideclose {
+  0% { min-width:400px; width:30vw; opacity:1; }
+  100% { min-width:0; width:0; opacity: 0; }
+}
+
+.shop-cart-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.shop-cart-body::-webkit-scrollbar-thumb {
+  background: rgb(140, 144, 184);
+}

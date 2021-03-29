@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import './login.css';
 
 function LoginPage() {
 
@@ -11,7 +12,7 @@ function LoginPage() {
   }
 
   return(
-    <div className="card mt-3">
+    <div className="card mt-3 login-body">
       <div className="card-body">
         <h5 className="card-title mb-3">Login</h5>
         <form onSubmit={e => submitForm(e)}>
@@ -23,8 +24,13 @@ function LoginPage() {
             <label htmlFor="passwordInput" className="form-label">Password</label>
             <input type="password" className="form-control" ref={pw} id="passwordInput" placeholder="********" />
           </div>
-          <button className="btn btn-primary">Login</button>
+          <div className="text-center mb-3">
+            <button className="btn btn-primary">Login</button>
+          </div>
         </form>
+        <div className="text-center mb-3">
+          <button className="btn btn-secondary">Create a new account</button>
+        </div>
       </div>
     </div>
   )

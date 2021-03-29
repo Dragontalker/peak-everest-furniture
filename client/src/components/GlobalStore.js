@@ -1,11 +1,16 @@
-import { createContext, useReducer, useContext, useEffect } from "react"
+import { createContext, useReducer, useContext, useEffect } from "react";
+import noImg from '../assets/no-image.png';
 
 const initialData = {
   winX:window.innerWidth, 
   winY:window.innerHeight,
   loggedIn:true,
   username: "[User]",
-  shoppingcart: []
+  shoppingCart: [
+    {id:"product id", title:"product name", picture:noImg},
+    {id:"product id2", title:"product name 2", picture:noImg}
+  ],
+  openShopCart:false
 };
 
 /*! IMPORTANT all your reducer functionality goes here */
@@ -15,6 +20,8 @@ const dataReducer = (state, action) => {
     return {...state, winX:window.innerWidth, winY:window.innerHeight};
   case "logout":
     return {...state, loggedIn:false};
+  case "open-shop-cart":
+    return {...state, openShopCart: !state.openShopCart};
   default:
     throw new Error(`Invalid action type: ${action.type}`);
   }
