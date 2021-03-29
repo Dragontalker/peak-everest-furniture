@@ -15,12 +15,12 @@
 .tales {
     width: 100%;
 }
-/* 
-p {
+
+.carousel-text {
     color: white;
 }
 
-h5{
+.carousel-title{
     color: white
 }
 
@@ -31,4 +31,4 @@ h5{
 .card-image{
     width: 200px;
     height: 200px;
-} */
+}
