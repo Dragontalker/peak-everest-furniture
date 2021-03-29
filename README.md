@@ -33,9 +33,9 @@ npm run dev
 * redux(?)
 ​
 ## Pages
-* Registration
-  * Require email/password/display name
-  * Send email on registration?
+* -[ ] Registration
+  * -[ ] Require email/password/display name
+  * -[ ] Send email on registration?
 ​
 * -[ ] Login
   * OAuth2
