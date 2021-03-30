@@ -29,7 +29,10 @@ function ShopPage() {
         {/* create slides */}
         {bannerData.map((each,idx) => 
           <div key={idx} className="slide-item">
-            <span>Banner #{idx+1}</span>
+            <div className="desc">
+              <h5>Banner #{idx+1}</h5>
+              <p>Description and other stuff</p>
+            </div>
             <img src={each.img} alt="product" />
           </div>
         )}
