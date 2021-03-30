@@ -7,12 +7,12 @@ function ProductPage() {
   useEffect(() => {
     console.log(window.location.pathname);
     // productID in the pathname ^, API call DB for product info
-    setProduct({name:"product name"});
+    setProduct({id:window.location.pathname.replace("/product/","")});
   },[])
 
   return(
     <div>
-      Product Page: {product.name}
+      Product Page: {product.id}
     </div>
   )
 }
