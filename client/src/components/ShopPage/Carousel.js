@@ -16,7 +16,14 @@ function Carousel() {
     // create slide effect
     function slideRight() {
       // creates animation for images
-      // ...
+      const divWidth = slideContainer.current.clientWidth;
+      const fullWidth = slideContainer.current.scrollWidth - 2*divWidth;
+      const currentScroll = slideContainer.current.scrollLeft;
+      console.log(`last position: ${currentScroll}/${fullWidth}`);
+      if (currentScroll < fullWidth) {
+        slideContainer.current.scrollLeft += divWidth;
+      }
+      else slideContainer.current.scrollLeft = 0;
       // creates animation for buttons
       for (let i=0; i<indicators.current.children.length; i++) {
         let thisBtn = indicators.current.children[i];
@@ -46,17 +53,13 @@ function Carousel() {
         {/* create slides */}
         {products.map((each,idx) => 
           <div key={idx} className="slide-item">
+            <span>Product {idx+1}</span>
             <img src={each.img} alt="product" />
           </div>
         )}
-        <div className="slide-item">
+        <div key={products.length+1} className="slide-item">
+          <span>HIDDEN</span>
           <img src={products[0].img} alt="product" />
-        </div>
-        <div className="slide-item">
-          <img src={products[1].img} alt="product" />
-        </div>
-        <div className="slide-item">
-          <img src={products[2].img} alt="product" />
         </div>
       </div>
       <div className="carousel-indicators" ref={indicators}>
