@@ -22,29 +22,23 @@ function ShopPage() {
       <div className="all-products-list mb-3">
         <h1>All Products</h1>
           <div className="row">
-            {/* products.map( product => ) */}
             <div className="card">
               <img className="card-image" alt="product"/>
               <div className="card-body">
                 Hello
-                {/* 
-                <h5 class="card-title">product.name</h5>
-                <p class="card-text"> product.description</p>
-                <p class="card-text"> product.price</p>
-                */}
               </div>
             </div>
-            <div className="card">
+            {/* products.map( (product, idx) => )
+            <div key={idx} className="card">
               <img className="card-image" alt="product"/>
               <div className="card-body">
                 Hello
-                {/* 
                 <h5 class="card-title">product.name</h5>
                 <p class="card-text"> product.description</p>
                 <p class="card-text"> product.price</p>
-                */}
+                *
               </div>
-            </div>
+            </div>*/}
           </div>
       </div>
     </div>
