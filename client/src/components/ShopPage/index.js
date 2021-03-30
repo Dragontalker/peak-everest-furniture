@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 
 
 function ShopPage() {
-
   // const [products, setProducts] = useState([])
   
   // useEffect(function () {
