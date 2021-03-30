@@ -6,6 +6,7 @@ const products = [
   {img:"https://i.gyazo.com/cc114cc01d65fa4820be8652151b61b0.png"},
   {img:"https://i.gyazo.com/97b764beb0a96af871fec590c7e217c3.png"}
 ]
+const slideTime = 600;
 
 function Carousel() {
 
@@ -34,17 +35,17 @@ function Carousel() {
       const divWidth = slideContainer.current.clientWidth;
       const fullWidth = slideContainer.current.scrollWidth - 2*divWidth;
       const currentScroll = slideContainer.current.scrollLeft;
+      const distPerFrame = 5/slideTime*divWidth;
       if (currentScroll < fullWidth) {
         // slide to the right
         const target = currentScroll + divWidth;
         interval2.current = setInterval(() => {
           if (!slideContainer.current) clearInterval(interval2.current);
-          else if (slideContainer.current.scrollLeft < target) slideContainer.current.scrollLeft += 5;
-          else if (slideContainer.current.scrollLeft > target) {
+          else if (slideContainer.current.scrollLeft < target) slideContainer.current.scrollLeft += distPerFrame;
+          else {
             slideContainer.current.scrollLeft = target;
             clearInterval(interval2.current);
           }
-          else clearInterval(interval2.current);
         }, 5);
       }
       else {
@@ -52,7 +53,7 @@ function Carousel() {
         const target = currentScroll + divWidth;
         interval2.current = setInterval(() => {
           if (!slideContainer.current) clearInterval(interval2.current);
-          else if (slideContainer.current.scrollLeft < target) slideContainer.current.scrollLeft += 5;
+          else if (slideContainer.current.scrollLeft < target) slideContainer.current.scrollLeft += distPerFrame;
           else {
             slideContainer.current.scrollLeft = 0;
             clearInterval(interval2.current);

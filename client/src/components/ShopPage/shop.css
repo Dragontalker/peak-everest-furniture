@@ -1,3 +1,5 @@
+/* CAROUSEL */
+
 .carousel {
     height: 30rem;
     width: 100%;
@@ -26,6 +28,7 @@
     display: inline-block;
     text-align: center;
     position: relative;
+    vertical-align: top;
 }
 
 .slide-item span {
@@ -64,31 +67,7 @@
     opacity: 0.8;
 }
 
-/* .carousel {
-    width: 100%;
-    height: 70vh;
-}
-
-.carousel-inner {
-    width: 100%;
-    max-height: 50vh;
-}
-
-.carousel-image {
-    height: 500px;
-}
-
-.tales {
-    width: 100%;
-}
-
-.carousel-text {
-    color: white;
-}
-
-.carousel-title{
-    color: white
-} */
+/* PRODUCTS LIST */
 
 .all-products-list .card{
     width: 18rem ;
