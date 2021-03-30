@@ -55,15 +55,20 @@ function ShopPage() {
       <div className="all-products-list mb-3">
         <h1>All Products</h1>
           <div className="row">
-            {products.map( (product, idx) => 
-            <div key={idx} className="card shop-card">
-              <img src={product.img} className="shop-card-img" alt="product"/>
-              <div className="card-body">
-                <h5 class="card-title">{product.name}</h5>
-                <p class="card-text"> {product.description}</p>
-                <p class="card-text"> {product.price}</p>
+            {products.map((product, idx) => 
+              <div key={idx} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="card">
+                  <div className="shop-card-img">
+                    <img src={product.img} className="card-img-top img-fluid" alt={product.name} />
+                  </div>
+                  <div className="card-body">
+                    <h5 className="card-title">{product.name}</h5>
+                    <p className="card-text"> {product.description}</p>
+                    <p className="card-text"> ${product.price}</p>
+                  </div>
+                </div>
               </div>
-            </div>)}
+            )}
           </div>
       </div>
     </div>
