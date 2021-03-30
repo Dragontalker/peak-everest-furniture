@@ -18,35 +18,6 @@ function ShopPage() {
   return(
     <div className="shop-page mt-3">
       <Carousel />
-      {/* <div id="carouselExampleDark" class="carousel carousel-dark slide mt-2" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="10000">
-            <img src="https://www.hermanmiller.com/content/dam/hmicom/page_assets/products/categories/gaming/it_cmp_gaming_motia_gaming_table.jpg" class="d-block w-100 carousel-image" alt="desk"/> 
-            <div class="carousel-caption d-none d-md-block">
-              <h5 class="carousel-title">Standing Desk</h5>
-              <p class="carousel-text">Some representative placeholder content for the first slide.</p>
-            </div>
-          </div>
-          <div class="carousel-item" data-bs-interval="2000">
-            <img src="https://i.gyazo.com/cc114cc01d65fa4820be8652151b61b0.png" class="d-block w-100 carousel-image" alt="chair"/>
-            <div class="carousel-caption d-none d-md-block">
-              <h5 class="carousel-title">Ergonomic Chair</h5>
-              <p class="carousel-text">Some representative placeholder content for the second slide.</p>
-            </div>
-          </div>
-          <div class="carousel-item" data-bs-interval="2000">
-            <img src="https://i.gyazo.com/97b764beb0a96af871fec590c7e217c3.png" class="d-block w-100 carousel-image" alt="chair"/>
-            <div class="carousel-caption d-none d-md-block">
-              <h5 class="carousel-title">Featured Setup</h5>
-            </div>
-          </div>
-        </div>
-      </div> */}
       <hr/>
       <div className="all-products-list mb-3">
         <h1>All Products</h1>

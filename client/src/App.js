@@ -6,6 +6,7 @@ import Register from './components/RegisterPage';
 import Login from './components/LoginPage';
 import ShoppingCart from './components/ShoppingCart';
 import NavbarExtension from './components/NavbarExtension';
+import ProductPage from './components/ProductPage';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
               <Route exact path="/"><Shop /></Route>
               <Route path="/register"><Register /></Route>
               <Route path="/login"><Login /></Route>
+              <Route path="/product"><ProductPage /></Route>
             </Switch>
           </div>
           <ShoppingCart />
