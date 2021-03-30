@@ -6,6 +6,7 @@ function Navbar() {
   const [store, updateStore] = useStoreContext();
 
   function handleLogout() {
+    if (store.openShopCart) updateStore({type:"toggle-shop-cart"});
     updateStore({type:"logout"});
   }
 
