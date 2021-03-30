@@ -4,7 +4,7 @@ import noImg from '../assets/no-image.png';
 const initialData = {
   winX:window.innerWidth, 
   winY:window.innerHeight,
-  loggedIn:true,
+  loggedIn:false,
   username: "[User]",
   shoppingCart: [
     {id:"product id", title:"product name", picture:noImg},
