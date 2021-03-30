@@ -34,7 +34,7 @@ function Navbar() {
     )
     else return (
       <div className="navbar-nav">
-        <button class="btn navbar-toggler-icon" onClick={openNavExt}></button>
+        <button className="btn navbar-toggler-icon" onClick={openNavExt}></button>
       </div>
     )
   }

@@ -1,5 +1,3 @@
-import React from 'react';
-
 function RegisterPage() {
 
   function submitForm(e) {
@@ -12,19 +10,19 @@ function RegisterPage() {
       <div className="card-body">
         <h5 className="card-title mb-3">Sign Up</h5>
         <form onSubmit={e => submitForm(e)}>
-          <div class="mb-3">
+          <div className="mb-3">
             <label htmlFor="displayNameInput" className="form-label">Display name</label>
             <input type="text" className="form-control" id="displayNameInput" placeholder="name" />
           </div>
-          <div class="mb-3">
+          <div className="mb-3">
             <label htmlFor="emailInput" className="form-label">Email</label>
             <input type="email" className="form-control" id="emailInput" placeholder="name@example.com" />
           </div>
-          <div class="mb-3">
+          <div className="mb-3">
             <label htmlFor="passwordInput" className="form-check-label" >Password</label>
-            <input type="password" class="form-control" id="passwordInput" placeholder="********" />
+            <input type="password" className="form-control" id="passwordInput" placeholder="********" />
           </div>
-          <div class="mb-3">
+          <div className="mb-3">
             <label htmlFor="passwordReinput" className="form-check-label" >Confirm Password</label>
             <input type="password" className="form-control" id="passwordReinput" placeholder="********" />
           </div>

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useStoreContext } from '../GlobalStore';
 
 const products = [
   {img:"https://www.hermanmiller.com/content/dam/hmicom/page_assets/products/categories/gaming/it_cmp_gaming_motia_gaming_table.jpg"},
@@ -8,22 +9,56 @@ const products = [
 
 function Carousel() {
 
+  const [store] = useStoreContext();
   const slideContainer = useRef(null);
   const indicators = useRef(null);
   const interval = useRef(null);
+  const interval2 = useRef(null);
 
   useEffect(() => {
+    // reset on window resize
+    clearInterval(interval.current);
+    clearInterval(interval2.current);
+    // find current highlighted indicator
+    let currentSlide = 0;
+    for (let i=0; i<indicators.current.children.length; i++) {
+      if (indicators.current.children[i].classList.contains("active")) {
+        currentSlide = i;
+        break;
+      }
+    }
+    slideContainer.current.scrollLeft = currentSlide*slideContainer.current.clientWidth;
     // create slide effect
     function slideRight() {
       // creates animation for images
       const divWidth = slideContainer.current.clientWidth;
       const fullWidth = slideContainer.current.scrollWidth - 2*divWidth;
       const currentScroll = slideContainer.current.scrollLeft;
-      console.log(`last position: ${currentScroll}/${fullWidth}`);
       if (currentScroll < fullWidth) {
-        slideContainer.current.scrollLeft += divWidth;
+        // slide to the right
+        const target = currentScroll + divWidth;
+        interval2.current = setInterval(() => {
+          if (!slideContainer.current) clearInterval(interval2.current);
+          else if (slideContainer.current.scrollLeft < target) slideContainer.current.scrollLeft += 5;
+          else if (slideContainer.current.scrollLeft > target) {
+            slideContainer.current.scrollLeft = target;
+            clearInterval(interval2.current);
+          }
+          else clearInterval(interval2.current);
+        }, 5);
       }
-      else slideContainer.current.scrollLeft = 0;
+      else {
+        // slide to the right
+        const target = currentScroll + divWidth;
+        interval2.current = setInterval(() => {
+          if (!slideContainer.current) clearInterval(interval2.current);
+          else if (slideContainer.current.scrollLeft < target) slideContainer.current.scrollLeft += 5;
+          else {
+            slideContainer.current.scrollLeft = 0;
+            clearInterval(interval2.current);
+          }
+        }, 5)
+      }
       // creates animation for buttons
       for (let i=0; i<indicators.current.children.length; i++) {
         let thisBtn = indicators.current.children[i];
@@ -45,7 +80,7 @@ function Carousel() {
     return () => {
       clearInterval(interval.current);
     }
-  }, [])
+  }, [store.winX])
 
   return(
     <div className="carousel">
