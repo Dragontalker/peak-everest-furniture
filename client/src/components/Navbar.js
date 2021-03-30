@@ -10,28 +10,37 @@ function Navbar() {
   }
 
   function openShopCart() {
-    updateStore({type:"open-shop-cart"});
+    updateStore({type:"toggle-shop-cart"});
+  }
+
+  function openNavExt() {
+    updateStore({type:"toggle-nav-ext"});
   }
 
   function renderNavigation() {
-    if (store.loggedIn) return(
+    if (store.winX > 800 && store.loggedIn) return(
       <div className="navbar-nav">
         <NavLink exact to="/" className="nav-link" activeClassName="disabled">Home</NavLink>
         <button className="btn nav-link" onClick={openShopCart}>Shopping Cart</button>
         <button className="btn nav-link" onClick={handleLogout}>Logout</button>
       </div>
     )
-    else return (
+    else if (store.winX > 800) return (
       <div className="navbar-nav">
         <NavLink exact to="/" className="nav-link" activeClassName="disabled">Home</NavLink>
         <NavLink to="/register" className="nav-link" activeClassName="disabled">Register</NavLink>
         <NavLink to="/login" className="nav-link" activeClassName="disabled">Login</NavLink>
       </div>
     )
+    else return (
+      <div className="navbar-nav">
+        <button class="btn navbar-toggler-icon" onClick={openNavExt}></button>
+      </div>
+    )
   }
 
   return(
-    <nav className="navbar navbar-expand navbar-dark bg-dark">
+    <nav className="navbar navbar-expand navbar-dark bg-dark main-nav">
       <div className="container-fluid">
         {/* Logo/Branding */}
         <span className="navbar-brand">Peak Everest Furnitures</span>

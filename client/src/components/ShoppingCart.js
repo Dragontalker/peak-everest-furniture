@@ -25,7 +25,7 @@ function ShoppingCart() {
           <img className="img-thumbnail me-1" src={item.picture} alt={item.title} />
           <p className="card-text flex-fill">{item.title}</p>
           <div className="btn-group-vertical justify-content-end">
-            <button className="btn btn-outline-primary">Checkout</button>
+            <button className="btn btn-outline-dark">Checkout</button>
             <button className="btn btn-outline-danger">Cancel</button>
           </div>
       </li>
