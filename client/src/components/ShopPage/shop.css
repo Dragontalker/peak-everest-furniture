@@ -77,3 +77,15 @@
     width: 200px;
     height: 200px;
 }
+
+.shop-card {
+    background: none;
+    padding: 0%;
+    margin: 10px;
+    /* border-style: none; */
+}
+
+.shop-card-img{
+    width: 100%;
+    max-height: 200px;
+}
