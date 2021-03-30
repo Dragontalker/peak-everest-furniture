@@ -1,0 +1,20 @@
+.productPage-img{
+    width: 100%;
+    height: auto;
+}
+
+.card-background{
+    background: none;
+    border-style: none;
+    margin-top: 50px;
+}
+
+.product-button{
+    /* line-height: 12px;
+    width: 18px;
+    margin-top: 1px;
+    margin-right: 2px; */
+    position:absolute;
+    bottom:0;
+    right:0;
+}
