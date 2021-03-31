@@ -20,6 +20,7 @@ class RegisterPage extends Component {
   checkValidateEmail = () => {
     const {email} = this.state
     const regex = new RegExp('.+@.+\\..+')
+  
     if (!regex.test(email)) {
       alert('Invalid email format')
     }
@@ -37,10 +38,14 @@ class RegisterPage extends Component {
   submitForm = (e) => {
     e.preventDefault();
     console.log("attempting to sign up");
-    this.checkValidateEmail()
-    if (this.checkValidatePassword()) {
-      console.log('psw ok')
+    if (!this.checkValidateEmail()) {
+      return;
     }
+    if (!this.checkValidatePassword()) {
+      return;
+    }
+
+    console.log('form submited')
   }
 
   // render
