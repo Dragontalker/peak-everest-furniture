@@ -26,7 +26,7 @@ function ProductList(props) {
   return(
     <div className="admin-product-list table-responsive">
       <div className="header">
-        <h4>Product List</h4> 
+        <h5>Product List</h5> 
         <div className="btn-group">
           <button className="btn btn-sm btn-dark">Add</button>
           <button className="btn btn-sm btn-danger">Remove</button>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AccessDenied from './AccessDenied';
 import ProductList from './ProductList';
 import TransactionsList from './TransactionsList';
+import Charts from './Charts';
 import './admin.css';
 
 function AdminPage() {
@@ -17,7 +18,11 @@ function AdminPage() {
     setTrans([
       {userid:"123", productid:"1203-2343", status:"SOLD"},
       {userid:"123", productid:"1203-2344", status:"BOUGHT"},
-      {userid:"125", productid:"1203-2343", status:"BOUGHT"}
+      {userid:"125", productid:"1203-2343", status:"BOUGHT"},
+      {userid:"125", productid:"1203-2343", status:"CANCELLED"},
+      {userid:"126", productid:"1203-2345", status:"SOLD"},
+      {userid:"126", productid:"1203-2345", status:"BOUGHT"},
+      {userid:"125", productid:"1203-2345", status:"SOLD"}
     ])
     // fetch product info
     setProducts([
@@ -29,12 +34,14 @@ function AdminPage() {
 
   if (hasAccess) return(
     <div className="admin-page card mt-3">
+      <div className="card-header">
+        <h4>Welcome Back [Admin]</h4>
+      </div>
       <div className="card-body">
-        <h5 className="card-title">Welcome Back [Admin]</h5>
-        <p>Add: sales charts</p>
-        <p>Add: banner info (?)</p>
+        <Charts products={products} trans={trans} />
+        <br/>
         <ProductList products={products} trans={trans} />
-        <TransactionsList />
+        <TransactionsList products={products} trans={trans} />
       </div>
     </div>
   )

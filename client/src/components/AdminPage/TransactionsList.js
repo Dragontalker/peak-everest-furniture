@@ -4,7 +4,7 @@ function TransactionsList(props) {
 
   return(
     <div className="admin-trans-list table-responsive">
-      <h4>Ongoing Transactions</h4>
+      <h5>Ongoing Transactions</h5>
       <table className="table table-sm">
         <thead>
             <tr>
@@ -23,7 +23,7 @@ function TransactionsList(props) {
               <td>1203-2344</td>
               <th>Graco SnugRide</th>
               <td>Mar 30, 2021 10:45:23</td>
-              <td className="text-end"><button className="btn btn-sm btn-outline-dark">Sold/Delivered</button></td>
+              <td className="text-end"><button className="btn btn-sm btn-outline-dark">Delivered</button></td>
             </tr>
           </tbody>
       </table>
