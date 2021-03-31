@@ -3,19 +3,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./shop.css"
 import { useEffect, useState } from 'react'
 
-// const products = [{
-//   id: 1,
-//   name: "chair",
-//   description: "sample text",
-//   price: 100,
-//   img: "https://i.gyazo.com/cc114cc01d65fa4820be8652151b61b0.png"
-// },
-// {  id: 2,
-//   name: "desk",
-//   description: "sample text",
-//   price: 200,
-//   img: "https://www.hermanmiller.com/content/dam/hmicom/page_assets/products/categories/gaming/it_cmp_gaming_motia_gaming_table.jpg"
-// }]
 
 const bannerData = [
   {img:"https://www.hermanmiller.com/content/dam/hmicom/page_assets/products/categories/gaming/it_cmp_gaming_motia_gaming_table.jpg"},
