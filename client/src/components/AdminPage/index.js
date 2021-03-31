@@ -14,22 +14,18 @@ function AdminPage() {
   useEffect(() => {
     // redirect if userID is not admin user
     setAccess(true);
-    // fetch transaction info
-    setTrans([
-      {userid:"123", productid:"1203-2343", status:"SOLD"},
-      {userid:"123", productid:"1203-2344", status:"BOUGHT"},
-      {userid:"125", productid:"1203-2343", status:"BOUGHT"},
-      {userid:"125", productid:"1203-2343", status:"CANCELLED"},
-      {userid:"126", productid:"1203-2345", status:"SOLD"},
-      {userid:"126", productid:"1203-2345", status:"BOUGHT"},
-      {userid:"125", productid:"1203-2345", status:"SOLD"}
-    ])
-    // fetch product info
-    setProducts([
-      { id:"1203-2343", heading:"Bosch Refrigerator", price:4599.99, quantity:100, rating:4 },
-      { id:"1203-2344", heading:"Graco SnugRide", price:199.98, quantity:400, rating:3 },
-      { id:"1203-2345", heading:"Bose Home Speaker 500", price:399.99, quantity:20, rating:5 }
-    ])
+    async function fetchData() {
+      // fetch product info
+      const prodRes = await fetch("/api/products").then(r => r.json());
+      if (prodRes.error) console.log(prodRes.error);
+      else setProducts(prodRes);
+      // fetch transaction info
+      const transRes = await fetch("/api/transactions").then(r => r.json());
+      if (transRes.error) console.log(transRes.error);
+      else setTrans(transRes);
+    }
+    fetchData();
+
   }, [])
 
   if (hasAccess) return(

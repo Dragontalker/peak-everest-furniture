@@ -8,11 +8,11 @@ function Charts(props) {
   useEffect(() => {
     let newData = [];
     props.products.forEach(product => {
-      newData.push({ productid:product.id, buying:0, sold:0, cancelled:0 });
+      newData.push({ productid:product.id, bought:0, sold:0, cancelled:0 });
     });
     props.trans.forEach(entry => {
       newData.forEach(data => {
-        if (data.productid === entry.productid && entry.status === "BUYING") data.buying++;
+        if (data.productid === entry.productid && entry.status === "BOUGHT") data.bought++;
         else if (data.productid === entry.productid && entry.status === "SOLD") data.sold++;
         else if (data.productid === entry.productid && entry.status === "CANCELLED") data.cancelled++;
       })
@@ -28,7 +28,7 @@ function Charts(props) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="buying" fill="#8884d8" />
+          <Bar dataKey="bought" fill="#8884d8" />
           <Bar dataKey="sold" fill="#82ca9d" />
           <Bar dataKey="cancelled" fill="#ff2525" />
         </BarChart>

@@ -5,11 +5,13 @@
         "description": "Keep your food fresh and close at hand with this 4-door Bosch refrigerator. The fridge's 21 cu ft. capacity provides plenty of room for all your groceries, while the FarmFresh system keeps the contents perfectly chilled. Its HomeConnect system connects to your home network for integration with Nest, Alexa, Fitbit, and more.",
         "image": "https://multimedia.bbycastatic.ca/multimedia/products/1500x1500/136/13694/13694581.jpg",
         "price": 4599.99,
+        "quantity": 100,
         "rating": 4,
         "reviews": [ 
             { "name": "Fil", "rating": 4, "review": "Was awesome" },
             { "name": "Jane", "rating": 2, "review": "Broke after second use, returned." }
-        ] 
+        ]
+        
     },
     {  
         "id": "1203-2344",
@@ -17,6 +19,7 @@
         "description": "Enjoy added peace of mind with the Graco SnugRide SnugLock 35 infant car seat. You'll hear it click securely into place and know your child is safely strapped in. SnugLock technology offers almost effortless installation, while a positionable recline base has a level indicator to eliminate guesswork. Pair this seat with a Click Connect stroller for a complete travel system.",
         "image": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/133/13392/13392512.jpg",
         "price": 199.98,
+        "quantity": 400,
         "rating": 3,
         "reviews": [ 
             { "name": "John", "rating": 4, "review": "Baby seemed happy" },
@@ -30,6 +33,7 @@
         "description": "It’s powerfully simple. Fill any room with wall-to-wall stereo sound, while built-in voice control puts millions of songs at the tip of your tongue.",
         "image": "https://assets.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/global/products/speakers/bose_home_speaker_500/product_silo_images/bose_home_speaker_500_triple_black_vpa_alexa_EC_hero.psd/jcr:content/renditions/cq5dam.web.600.600.png",
         "price": 399.99,
+        "quantity": 20,
         "rating": 5 
     }
 ]

@@ -1,4 +1,3 @@
-import { initialize } from 'passport';
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router"
 import './productPage.css'
@@ -9,6 +8,7 @@ function ProductPage() {
 
   useEffect(() => {
     init()
+    // eslint-disable-next-line
   },[])
 
   async function init() {
