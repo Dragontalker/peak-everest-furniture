@@ -5,3 +5,7 @@ exports.register = (req, res, next) => {
 exports.login = (req, res, next) => {
     res.send("Login Route");
 };
+
+exports.forgotPassword = (req, res, next) => {
+    res.send("Forgot Password Route");
+};
