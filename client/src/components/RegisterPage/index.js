@@ -1,32 +1,85 @@
-import React from 'react';
-const {Users} = require('../../../../app/db/models')
+import {React, Component} from 'react';
 
-function RegisterPage() {
 
-  return(
-    <div class="row justify-content-center">
-      <div class="col-4">
-        <form style="max-width: 500px; min-width: 300px">
-          <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username"/>
-          </div>
-    
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email"/>
-          </div>
-    
-          <div class="mb-3">
-            <label class="form-check-label" for="password">Password</label>
-            <input type="password" class="form-control" id="password"/>
-          </div>
-    
-          <button type="submit" class="btn btn-dark">Register</button>
-        </form>
+class RegisterPage extends Component {
+  // state
+  state = {
+    name: '',
+    email: '',
+    password: '',
+    repassword: ''
+  }
+  // functions
+  handleChange = (event) => {
+    const {name, value} = event.target
+    this.setState({
+      [name]: value
+    })
+  }
+
+  checkValidateEmail = () => {
+    const {email} = this.state
+    const regex = new RegExp('.+@.+\\..+')
+    if (!regex.test(email)) {
+      alert('Invalid email format')
+    }
+  }
+
+  checkValidatePassword = () => {
+    const {password, repassword} = this.state
+    if (password !== repassword) {
+      alert("Password does not match")
+      return false
+    }
+    return true
+  }
+
+  submitForm = (e) => {
+    e.preventDefault();
+    console.log("attempting to sign up");
+    this.checkValidateEmail()
+    if (this.checkValidatePassword()) {
+      console.log('psw ok')
+    }
+  }
+
+  // render
+  render() {
+    return(
+      <div className="card mt-3 login-body">
+        <div className="card-body">
+          <h5 className="card-title mb-3">Sign Up</h5>
+          <form onSubmit={(e) => this.submitForm(e)}>
+            <div className="mb-3">
+              <label htmlFor="displayNameInput" className="form-label">Display name</label>
+              <input name='name' type="text" className="form-control" id="displayNameInput" placeholder="name" onChange={this.handleChange}/>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="emailInput" className="form-label">Email</label>
+              <input name='email' type="email" className="form-control" id="emailInput" placeholder="name@example.com" onChange={this.handleChange}/>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="passwordInput" className="form-check-label" >Password</label>
+              <input name='password' type="password" className="form-control" id="passwordInput" placeholder="********" onChange={this.handleChange}/>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="passwordReinput" className="form-check-label" >Confirm Password</label>
+              <input name='repassword' type="password" className="form-control" id="passwordReinput" placeholder="********" onChange={this.handleChange}/>
+            </div>
+            <div className="text-center mb-3">
+              <button className="btn btn-dark">Register</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+
+
+
+
 }
+
+
 
 export default RegisterPage;

@@ -6,46 +6,50 @@ function Navbar() {
   const [store, updateStore] = useStoreContext();
 
   function handleLogout() {
+    if (store.openShopCart) updateStore({type:"toggle-shop-cart"});
     updateStore({type:"logout"});
   }
 
-  //user is logged in
-  if (store.loggedIn) {
-    return(
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <div className="container-fluid">
-          {/* Logo/Branding */}
-          <span className="navbar-brand">Project 3</span>
-          <span className="navbar-brand">Hello, {store.username}</span>
-          {/* Navlinks */}
-          <div class="navbar-nav">
-            <NavLink exact to="/" className="nav-link" activeClassName="disabled">Home</NavLink>
-            <button className="btn nav-link" onClick={handleLogout}>Logout</button>
-          </div>
+  function openShopCart() {
+    updateStore({type:"toggle-shop-cart"});
+  }
 
-        </div>
-      </nav>
+  function openNavExt() {
+    updateStore({type:"toggle-nav-ext"});
+  }
+
+  function renderNavigation() {
+    if (store.winX > 800 && store.loggedIn) return(
+      <div className="navbar-nav">
+        <NavLink exact to="/" className="nav-link" activeClassName="disabled">Home</NavLink>
+        <button className="btn nav-link" onClick={openShopCart}>Shopping Cart</button>
+        <button className="btn nav-link" onClick={handleLogout}>Logout</button>
+      </div>
+    )
+    else if (store.winX > 800) return (
+      <div className="navbar-nav">
+        <NavLink exact to="/" className="nav-link" activeClassName="disabled">Home</NavLink>
+        <NavLink to="/register" className="nav-link" activeClassName="disabled">Register</NavLink>
+        <NavLink to="/login" className="nav-link" activeClassName="disabled">Login</NavLink>
+      </div>
+    )
+    else return (
+      <div className="navbar-nav">
+        <button className="btn navbar-toggler-icon" onClick={openNavExt}></button>
+      </div>
     )
   }
-  // user is not logged in
-  else {
-    return(
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <div className="container-fluid">
-          {/* Logo/Branding */}
-          <span className="navbar-brand">Project 3</span>
-          {/* Navlinks */}
-          <div class="navbar-nav">
-            <span className="nav-link text-muted">{store.winX}x{store.winY}</span>
-            <NavLink exact to="/" className="nav-link" activeClassName="active">Home</NavLink>
-            <NavLink to="/register" className="nav-link" activeClassName="active">Register</NavLink>
-            <NavLink to="/login" className="nav-link" activeClassName="active">Login</NavLink>
-          </div>
-  
-        </div>
-      </nav>
-    )
-  }
+
+  return(
+    <nav className="navbar navbar-expand navbar-dark bg-dark main-nav">
+      <div className="container-fluid">
+        {/* Logo/Branding */}
+        <span className="navbar-brand">Peak Everest Furnitures</span>
+        {/* Navlinks */}
+        {renderNavigation()}
+      </div>
+    </nav>
+  )
 }
 
 export default Navbar;
