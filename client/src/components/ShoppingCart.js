@@ -19,25 +19,21 @@ function ShoppingCart() {
     // eslint-disable-next-line
   }, [store.openShopCart])
 
-  function renderList() {
-    return(store.shoppingCart.map(item => 
-      <li className="list-group-item d-flex mb-3 px-2 py-1" key={item.id}>
-          <img className="img-thumbnail me-1" src={item.picture} alt={item.title} />
-          <p className="card-text flex-fill">{item.title}</p>
-          <div className="btn-group-vertical justify-content-end">
-            <button className="btn btn-outline-dark">Checkout</button>
-            <button className="btn btn-outline-danger">Cancel</button>
-          </div>
-      </li>
-    ))
-  }
-
   if (visible) {
     return(
       <div className="shop-cart-body" ref={shoppingCart}>
         <h4 className="mt-2 mb-3">Shopping Cart</h4>
         <ul className="list-group">
-          {renderList()}
+          {store.shoppingCart.map(item => 
+            <li className="list-group-item d-flex shop-cart-item" key={item.id}>
+                <img className="img-thumbnail me-1" src={item.picture} alt={item.title} />
+                <p className="card-text flex-fill">{item.title}</p>
+                <div className="btn-group-vertical justify-content-end">
+                  <button className="btn btn-sm btn-outline-dark">Checkout</button>
+                  <button className="btn btn-sm btn-outline-danger">Cancel</button>
+                </div>
+            </li>
+          )}
         </ul>
       </div>
     )

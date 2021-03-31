@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use( express.static(path.join('client','build')) )
 } else {
     // for serving all the normal html
-    app.use( express.static('public') )
+    app.use( express.static('./client/build') )
 }
 
 // connect to route file for API handling

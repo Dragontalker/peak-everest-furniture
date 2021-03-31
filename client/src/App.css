@@ -54,8 +54,15 @@ body {
   animation: sideopen 0.3s;
 }
 
-.shop-cart-body img{
-  max-height: 100px;
+.shop-cart-item {
+  padding: 0;
+  border: none;
+  margin-bottom: 0.4rem;
+  border-radius: 0.2rem;
+}
+
+.shop-cart-item img{
+  max-height: 80px;
 }
 
 .shop-cart-close {
