@@ -60,11 +60,11 @@ function ProductPage() {
               <div className="row">
                 <h5>View Other Products</h5>
                 {otherProducts && otherProducts.map((product, idx) => 
-                  <div key={idx} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                  <div key={idx} className="col-3 col-sm-3 col-md-3 col-lg-3">
                     <div className="card cardBackground">
                       <div className="shop-card-img">
                         <Link to={"/product/"+product.id} className="stretched-link">
-                        <img src={product.image[0]} className="card-img-top img-fluid imgOther" alt={product.heading} />
+                        <img src={product.image[0]} className="card-img-top img-fluid" alt={product.heading} />
                         </Link>
                       </div>
                     </div>
