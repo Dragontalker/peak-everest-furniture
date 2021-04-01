@@ -3,48 +3,63 @@
     "id":"111",
     "userid":"123",
     "productid":"1203-2343",
-    "status":"SOLD"
+    "status":"SOLD",
+    "timestamp":12341617179948896
   },
   {
     "id":"222",
     "userid":"123",
     "productid":"1203-2344",
-    "status":"BOUGHT"
+    "status":"BOUGHT",
+    "timestamp":12341617186747896
   },
   {
     "id":"333",
     "userid":"125",
     "productid":"1203-2343",
-    "status":"BOUGHT"
+    "status":"BOUGHT",
+    "timestamp":12341617196745896
   },
   {
     "id":"444",
     "userid":"125",
     "productid":"1203-2343",
-    "status":"CANCELLED"
+    "status":"CANCELLED",
+    "timestamp":12341617216746896
   },
   {
     "id":"555",
     "userid":"124",
     "productid":"1203-2345",
-    "status":"SOLD"
+    "status":"SOLD",
+    "timestamp":12341617226741196
   },
   {
     "id":"666",
     "userid":"124",
     "productid":"1203-2345",
-    "status":"BOUGHT"
+    "status":"BOUGHT",
+    "timestamp":12341617226718496
   },
   {
     "id":"777",
     "userid":"125",
     "productid":"1203-2345",
-    "status":"SOLD"
+    "status":"SOLD",
+    "timestamp":12341617236743894
   },
   {
     "id":"888",
     "userid":"126",
     "productid":"1203-2344",
-    "status":"CANCELLED"
+    "status":"CANCELLED",
+    "timestamp":12341617236748796
+  },
+  {
+    "id":"999",
+    "userid":"126",
+    "productid":"1203-2343",
+    "status":"BUYING",
+    "timestamp":12341617236748896
   }
 ]
