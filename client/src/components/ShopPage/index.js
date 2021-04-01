@@ -47,11 +47,10 @@ function ShopPage() {
               <div key={idx} className="col-12 col-sm-6 col-md-4 col-lg-3">
                 <div className="card">
                   <div className="shop-card-img">
-                    <img src={product.image} className="card-img-top img-fluid" alt={product.heading} />
+                    <img src={product.image[0]} className="card-img-top img-fluid" alt={product.heading} />
                   </div>
                   <div className="card-body">
                     <h5 className="card-title">{product.heading}</h5>
-                    <p className="card-text"> {product.description}</p>
                     <p className="card-text"> ${product.price}</p>
                     <a href={"/product/"+product.id} className="stretched-link">See Product</a>
                   </div>

@@ -23,7 +23,7 @@ function ProductPage() {
         <div className="row g-0">
           <div className="col-md-6">
             {/* <img src={product.img} alt={product.name} */}
-            <img className="productPage-img" src={product.image} alt={product.name} />
+            {product.image && product.image.map( img => <img className="productPage-img" src={img} alt={product.name} />)}
           </div>
           <div className="col-md-6">
             <div className="card-body">

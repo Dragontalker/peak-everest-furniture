@@ -3,7 +3,7 @@
         "id": "1203-2343",
         "heading": "Bosch Refrigerator",
         "description": "Keep your food fresh and close at hand with this 4-door Bosch refrigerator. The fridge's 21 cu ft. capacity provides plenty of room for all your groceries, while the FarmFresh system keeps the contents perfectly chilled. Its HomeConnect system connects to your home network for integration with Nest, Alexa, Fitbit, and more.",
-        "image": "https://multimedia.bbycastatic.ca/multimedia/products/1500x1500/136/13694/13694581.jpg",
+        "image": ["https://multimedia.bbycastatic.ca/multimedia/products/1500x1500/136/13694/13694581.jpg", "https://cdn.rona.ca/images/30855142c_L.jpg"],
         "price": 4599.99,
         "quantity": 100,
         "rating": 4,
@@ -17,7 +17,7 @@
         "id": "1203-2344",
         "heading": "Graco SnugRide",
         "description": "Enjoy added peace of mind with the Graco SnugRide SnugLock 35 infant car seat. You'll hear it click securely into place and know your child is safely strapped in. SnugLock technology offers almost effortless installation, while a positionable recline base has a level indicator to eliminate guesswork. Pair this seat with a Click Connect stroller for a complete travel system.",
-        "image": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/133/13392/13392512.jpg",
+        "image": ["https://multimedia.bbycastatic.ca/multimedia/products/500x500/133/13392/13392512.jpg"],
         "price": 199.98,
         "quantity": 400,
         "rating": 3,
@@ -31,9 +31,16 @@
         "id": "1203-2345",
         "heading": "Bose Home Speaker 500",
         "description": "It’s powerfully simple. Fill any room with wall-to-wall stereo sound, while built-in voice control puts millions of songs at the tip of your tongue.",
-        "image": "https://assets.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/global/products/speakers/bose_home_speaker_500/product_silo_images/bose_home_speaker_500_triple_black_vpa_alexa_EC_hero.psd/jcr:content/renditions/cq5dam.web.600.600.png",
+        "image": ["https://assets.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/global/products/speakers/bose_home_speaker_500/product_silo_images/bose_home_speaker_500_triple_black_vpa_alexa_EC_hero.psd/jcr:content/renditions/cq5dam.web.600.600.png"],
         "price": 399.99,
         "quantity": 20,
         "rating": 5 
+    },
+    {
+        "id": "1203-2346", 
+        "heading": "Bekant",
+        "description": "This sturdy desk is built to outlast years of coffee and hard work. You get a generous work surface and a clever solution to keep cords in place underneath.",
+        "image": ["https://www.ikea.com/ca/en/images/products/bekant-desk-black-stained-ash-veneer-black__0736414_pe740529_s5.jpg?f=s", "https://www.ikea.com/ca/en/images/products/bekant-desk-black-stained-ash-veneer-black__0853167_pe714690_s5.jpg?f=g", "https://www.ikea.com/ca/en/images/products/bekant-desk-black-stained-ash-veneer-black__0735086_pe739739_s5.jpg?f=g", "https://www.ikea.com/ca/en/images/products/bekant-desk-black-stained-ash-veneer-black__0855886_pe714484_s5.jpg?f=g"],
+        "price": 200
     }
 ]
