@@ -55,7 +55,7 @@ function ProductPage() {
           <div class="card border-light mb-3">
           <div class="card-header">{review.name}</div>
           <div class="card-body">
-            <h5 class="card-title">Rating: {review.rating}</h5>
+            <h5 class="card-title">Rating: {review.rating}/5</h5>
             <p class="card-text">{review.review}</p>
           </div>
         </div>
