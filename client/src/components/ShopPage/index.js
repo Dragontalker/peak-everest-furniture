@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react'
 
 
 const bannerData = [
-  {img:"https://www.hermanmiller.com/content/dam/hmicom/page_assets/products/categories/gaming/it_cmp_gaming_motia_gaming_table.jpg"},
-  {img:"https://i.gyazo.com/cc114cc01d65fa4820be8652151b61b0.png"},
-  {img:"https://i.gyazo.com/97b764beb0a96af871fec590c7e217c3.png"}
+  {heading:"Banner #1", desc:"Extra info 1", img:"https://www.hermanmiller.com/content/dam/hmicom/page_assets/products/categories/gaming/it_cmp_gaming_motia_gaming_table.jpg"},
+  {heading:"Banner #2", desc:"Extra info 2", img:"https://i.gyazo.com/cc114cc01d65fa4820be8652151b61b0.png"},
+  {heading:"Banner #3", desc:"Extra info 3", img:"https://i.gyazo.com/97b764beb0a96af871fec590c7e217c3.png"}
 ]
 
 function ShopPage() {
@@ -32,8 +32,8 @@ function ShopPage() {
         {bannerData.map((each,idx) => 
           <div key={idx} className="slide-item">
             <div className="desc">
-              <h5>Banner #{idx+1}</h5>
-              <p>Description and other stuff</p>
+              <h5>{each.heading}</h5>
+              <p>{each.desc}</p>
             </div>
             <img src={each.img} alt="product" />
           </div>

@@ -1,5 +1,4 @@
 import { createContext, useReducer, useContext, useEffect } from "react";
-import noImg from '../assets/no-image.png';
 
 const initialData = {
   winX:window.innerWidth, 
@@ -7,8 +6,8 @@ const initialData = {
   loggedIn:false,
   username: "[User]",
   shoppingCart: [
-    {id:"product id", title:"product name", picture:noImg},
-    {id:"product id2", title:"product name 2", picture:noImg}
+    {id:"123a", productid:"1203-2343", heading:"Bosch Refrigerator", transactionid:"111"},
+    {id:"321b", productid:"1203-2344", heading:"Graco SnugRide", transactionid:"222"}
   ],
   openShopCart:false,
   openNavExt:false
@@ -27,6 +26,14 @@ const dataReducer = (state, action) => {
     return {...state, openShopCart: !state.openShopCart};
   case "toggle-nav-ext":
     return {...state, openNavExt: !state.openNavExt};
+  case "checkout":
+    // SET transaction status to "BOUGHT"
+    // REMOVE entry from shopping cart
+    return {...state};
+  case "cancel":
+    // SET transaction status to "CANCELLED"
+    // REMOVE entry from shopping cart
+    return {...state};
   default:
     throw new Error(`Invalid action type: ${action.type}`);
   }
