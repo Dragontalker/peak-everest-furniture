@@ -14,19 +14,19 @@ function AdminPage() {
   useEffect(() => {
     // redirect if userID is not admin user
     setAccess(true);
-    async function fetchData() {
-      // fetch product info
-      const prodRes = await fetch("/api/products").then(r => r.json());
-      if (prodRes.error) console.log(prodRes.error);
-      else setProducts(prodRes);
-      // fetch transaction info
-      const transRes = await fetch("/api/transactions").then(r => r.json());
-      if (transRes.error) console.log(transRes.error);
-      else setTrans(transRes);
-    }
-    fetchData();
-
+    refreshData();
   }, [])
+
+  async function refreshData() {
+    // fetch product info
+    const prodRes = await fetch("/api/products").then(r => r.json());
+    if (prodRes.error) console.log(prodRes.error);
+    else setProducts(prodRes);
+    // fetch transaction info
+    const transRes = await fetch("/api/transactions").then(r => r.json());
+    if (transRes.error) console.log(transRes.error);
+    else setTrans(transRes);
+  }
 
   if (hasAccess) return(
     <div className="admin-page card mt-3">
@@ -37,7 +37,7 @@ function AdminPage() {
         <Charts products={products} trans={trans} />
         <br/>
         <ProductList products={products} trans={trans} />
-        <TransactionsList products={products} trans={trans} />
+        <TransactionsList products={products} trans={trans} refreshData={refreshData} />
       </div>
     </div>
   )

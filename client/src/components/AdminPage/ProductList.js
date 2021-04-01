@@ -27,10 +27,7 @@ function ProductList(props) {
     <div className="admin-product-list table-responsive">
       <div className="header">
         <h5>Product List</h5> 
-        <div className="btn-group">
-          <button className="btn btn-sm btn-dark">Add</button>
-          <button className="btn btn-sm btn-danger">Remove</button>
-        </div>
+        <button className="btn btn-sm btn-dark">Add New Product</button>
       </div>
       
       <table className="table table-sm">
@@ -42,7 +39,7 @@ function ProductList(props) {
             <th scope="col">Inventory</th>
             <th scope="col">Units Sold</th>
             <th scope="col">Profit</th>
-            <th scope="col"> </th>
+            <th scope="col"></th>
           </tr>
         </thead>
 
@@ -55,7 +52,9 @@ function ProductList(props) {
               <td>{product.quantity}</td>
               <td>{product.unitsSold}</td>
               <td>${product.profit}</td>
-              <td className="text-end"><button className="btn btn-sm btn-outline-dark">Edit</button></td>
+              <td className="text-end">
+                <button className="btn btn-sm btn-outline-dark">Edit</button>
+              </td>
             </tr>
           })}
         </tbody>

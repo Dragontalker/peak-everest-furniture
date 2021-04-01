@@ -26,14 +26,6 @@ const dataReducer = (state, action) => {
     return {...state, openShopCart: !state.openShopCart};
   case "toggle-nav-ext":
     return {...state, openNavExt: !state.openNavExt};
-  case "checkout":
-    // SET transaction status to "BOUGHT"
-    // REMOVE entry from shopping cart
-    return {...state};
-  case "cancel":
-    // SET transaction status to "CANCELLED"
-    // REMOVE entry from shopping cart
-    return {...state};
   default:
     throw new Error(`Invalid action type: ${action.type}`);
   }

@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { useStoreContext } from './GlobalStore';
+import { Link } from 'react-router-dom';
 
 function ShoppingCart() {
 
   const shoppingCart = useRef(null);
   const [visible, setVisible] = useState(false);
+  const [cartData, setCartData] = useState([]);
   const [store, setStore] = useStoreContext();
 
   useEffect(() => {
@@ -19,14 +21,28 @@ function ShoppingCart() {
     // eslint-disable-next-line
   }, [store.openShopCart])
 
-  function handleCheckout(id) {
+  useEffect(() => {
+    // fetch cartData using userid
+    setCartData([
+      {id:"123a", productid:"1203-2343", heading:"Bosch Refrigerator", transactionid:"111"},
+      {id:"321b", productid:"1203-2344", heading:"Graco SnugRide", transactionid:"222"}
+    ]);
+  }, [cartData])
+
+  async function handleCheckout(id) {
     console.log("checkout shopping cart item", id);
-    setStore({type:"checkout", id:id});
+    // SET transaction status to "BOUGHT"
+    // REMOVE entry from shopping cart
+    // FETCH new shoppingcart
+    setCartData([]);
   }
 
-  function handleCancel(id) {
+  async function handleCancel(id) {
     console.log("cancel shopping cart item", id);
-    setStore({type:"cancel", id:id});
+    // SET transaction status to "CANCELLED"
+    // REMOVE entry from shopping cart
+    // FETCH new shoppingcart
+    setCartData([]);
   }
 
   if (visible) {
@@ -40,7 +56,8 @@ function ShoppingCart() {
                 <h5 className="card-text">
                   {item.heading.length < 23 ? item.heading : item.heading.slice(0,22) + "..."}
                 </h5>
-                <a className="stretched-link" href={"/product/"+item.productid}>Go to product page</a>
+                <Link className="stretched-link" to={"/product/"+item.productid} 
+                  onClick={() => setStore({type:"toggle-shop-cart"})}>Go to product page</Link>
               </div>
               
               <div className="btn-group-vertical justify-content-end">

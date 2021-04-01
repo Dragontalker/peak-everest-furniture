@@ -16,6 +16,12 @@ function TransactionsList(props) {
     setTrans(transData);
   },[props])
 
+  async function transSold(id) {
+    console.log("set transaction with id " + id + " to status SOLD");
+    // SET transaction with id to sold
+    props.refreshData();
+  }
+
   return(
     <div className="admin-trans-list table-responsive">
       <h5>Ongoing Transactions</h5>
@@ -38,7 +44,7 @@ function TransactionsList(props) {
               <td>{entry.productid}</td>
               <th>{entry.productname}</th>
               <td>{new Date(entry.timestamp).toLocaleDateString()} {new Date(entry.timestamp).toLocaleTimeString()}</td>
-              <td className="text-end"><button className="btn btn-sm btn-outline-dark">Delivered</button></td>
+              <td className="text-end"><button className="btn btn-sm btn-outline-dark" onClick={() => transSold(entry.id)}>Delivery Sent</button></td>
             </tr>
           )}
         </tbody>
