@@ -19,11 +19,17 @@ function ProductPage() {
   }
 
   return(
+      <div className="container-flex justify-content">
       <div className="card mb-3 card-background">
-        <div className="row g-0">
+        <div className="row">
           <div className="col-md-6">
             {/* <img src={product.img} alt={product.name} */}
-            {product.image && product.image.map( img => <img className="productPage-img" src={img} alt={product.name} />)}
+            {product.image && product.image.map( img => 
+            <div className="col-lg-6 col-md-12 col-sm-12 outline d-flex align-items-stretch margin">
+              <div className="card">
+                <img src={img} alt={product.name}/>
+              </div>
+            </div>)}
           </div>
           <div className="col-md-6">
             <div className="card-body">
@@ -41,6 +47,7 @@ function ProductPage() {
             </div>
           </div>
         </div>
+      </div>
       </div>
   )
 }
