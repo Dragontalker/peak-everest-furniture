@@ -29,13 +29,13 @@ function ShoppingCart() {
     ]);
   }, [cartData])
 
-  async function handleCheckout(id) {
-    console.log("checkout shopping cart item", id);
-    // SET transaction status to "BOUGHT"
-    // REMOVE entry from shopping cart
-    // FETCH new shoppingcart
-    setCartData([]);
-  }
+  // async function handleCheckout(id) {
+  //   console.log("checkout shopping cart item", id);
+  //   // SET transaction status to "BOUGHT"
+  //   // REMOVE entry from shopping cart
+  //   // FETCH new shoppingcart
+  //   setCartData([]);
+  // }
 
   async function handleCancel(id) {
     console.log("cancel shopping cart item", id);
@@ -59,14 +59,11 @@ function ShoppingCart() {
                 <Link className="stretched-link" to={"/product/"+item.productid} 
                   onClick={() => setStore({type:"toggle-shop-cart"})}>Go to product page</Link>
               </div>
-              
-              <div className="btn-group-vertical justify-content-end">
-                <button className="btn btn-outline-dark" onClick={() => handleCheckout(item.id)}>Checkout</button>
-                <button className="btn btn-outline-danger" onClick={() => handleCancel(item.id)}>Cancel</button>
-              </div>
+              <button className="btn btn-outline-danger" onClick={() => handleCancel(item.id)}>Cancel</button>
             </li>
           )}
         </ul>
+        <button className="btn btn-light">Checkout</button>
       </div>
     )
   }

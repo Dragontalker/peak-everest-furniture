@@ -54,17 +54,6 @@ body {
   animation: sideopen 0.3s;
 }
 
-.shop-cart-item {
-  padding: 0;
-  border: none;
-  margin-bottom: 0.4rem;
-  border-radius: 0.5rem;
-}
-
-.shop-cart-item img{
-  max-height: 80px;
-}
-
 .shop-cart-close {
   animation: sideclose 0.3s;
 }
@@ -85,4 +74,15 @@ body {
 
 .shop-cart-body::-webkit-scrollbar-thumb {
   background: rgb(140, 144, 184);
+}
+
+.shop-cart-item {
+  padding: 0;
+  border: none;
+  margin-bottom: 0.4rem;
+  border-radius: 0.5rem;
+}
+
+.shop-cart-item img{
+  max-height: 80px;
 }

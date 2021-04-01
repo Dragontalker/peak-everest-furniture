@@ -5,10 +5,6 @@ const initialData = {
   winY:window.innerHeight,
   loggedIn:false,
   username: "[User]",
-  shoppingCart: [
-    {id:"123a", productid:"1203-2343", heading:"Bosch Refrigerator", transactionid:"111"},
-    {id:"321b", productid:"1203-2344", heading:"Graco SnugRide", transactionid:"222"}
-  ],
   openShopCart:false,
   openNavExt:false
 };
