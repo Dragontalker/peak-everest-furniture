@@ -9,27 +9,27 @@ function ProductPage() {
   useEffect(() => {
     init()
     // eslint-disable-next-line
-  },[])
+  }, [])
 
   async function init() {
     const url = `/api/products/${id}`
-    const data = await fetch(url).then(r=>r.json())
+    const data = await fetch(url).then(r => r.json())
     console.log(data)
     setProduct(data)
   }
 
-  return(
-      <div className="container-flex justify-content">
+  return (
+    <div>
       <div className="card mb-3 card-background">
         <div className="row">
           <div className="col-md-6">
             {/* <img src={product.img} alt={product.name} */}
-            {product.image && product.image.map( img => 
-            <div className="col-lg-6 col-md-12 col-sm-12 outline d-flex align-items-stretch margin">
-              <div className="card">
-                <img src={img} alt={product.name}/>
-              </div>
-            </div>)}
+            {product.image && product.image.map(img =>
+              <div className="col-lg-6 col-md-12 col-sm-12 outline d-flex align-items-stretch margin">
+                <div className="card">
+                  <img src={img} alt={product.name} />
+                </div>
+              </div>)}
           </div>
           <div className="col-md-6">
             <div className="card-body">
@@ -42,13 +42,27 @@ function ProductPage() {
               <h5>${product.price}</h5>
               <p className="card-text">Description:</p>
               <p className="card-text">{product.description}</p>
-              <br/>
+              <br />
               <button className="btn btn-dark product-button">Add to Cart</button>
             </div>
           </div>
         </div>
       </div>
-      </div>
+      <hr/>
+      <h1>Ratings and Reviews</h1>
+      {product.reviews && product.reviews.map(review =>
+        <div>
+          <div class="card border-light mb-3">
+          <div class="card-header">{review.name}</div>
+          <div class="card-body">
+            <h5 class="card-title">Rating: {review.rating}</h5>
+            <p class="card-text">{review.review}</p>
+          </div>
+        </div>
+        </div>
+        )}
+    </div>
+    
   )
 }
 
