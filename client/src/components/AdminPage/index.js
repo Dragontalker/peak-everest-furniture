@@ -3,6 +3,7 @@ import AccessDenied from './AccessDenied';
 import ProductList from './ProductList';
 import TransactionsList from './TransactionsList';
 import Charts from './Charts';
+import ProductDetails from './ProductDetails';
 import './admin.css';
 
 function AdminPage() {
@@ -10,6 +11,7 @@ function AdminPage() {
   const [hasAccess, setAccess] = useState(false);
   const [products, setProducts] = useState([]);
   const [trans, setTrans] = useState([]);
+  const [popupProduct, setPopupProduct] = useState(null);
 
   useEffect(() => {
     // redirect if userID is not admin user
@@ -29,16 +31,17 @@ function AdminPage() {
   }
 
   if (hasAccess) return(
-    <div className="admin-page card mt-3">
+    <div className="admin-page card my-3">
       <div className="card-header">
         <h4>Welcome Back [Admin]</h4>
       </div>
       <div className="card-body">
         <Charts products={products} trans={trans} />
         <br/>
-        <ProductList products={products} trans={trans} />
+        <ProductList products={products} trans={trans} setPopupProduct={setPopupProduct} />
         <TransactionsList products={products} trans={trans} refreshData={refreshData} />
       </div>
+      {popupProduct ? <ProductDetails product={popupProduct} setPopupProduct={setPopupProduct} refreshData={refreshData} /> : ""}
     </div>
   )
   else return <AccessDenied />

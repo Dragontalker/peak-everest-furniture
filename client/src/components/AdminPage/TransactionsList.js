@@ -44,7 +44,11 @@ function TransactionsList(props) {
               <td>{entry.productid}</td>
               <th>{entry.productname}</th>
               <td>{new Date(entry.timestamp).toLocaleDateString()} {new Date(entry.timestamp).toLocaleTimeString()}</td>
-              <td className="text-end"><button className="btn btn-sm btn-outline-dark" onClick={() => transSold(entry.id)}>Delivery Sent</button></td>
+              <td className="text-end">
+                <button className="btn btn-sm btn-outline-dark" onClick={() => transSold(entry.id)}>
+                  Delivery Sent
+                </button>
+              </td>
             </tr>
           )}
         </tbody>

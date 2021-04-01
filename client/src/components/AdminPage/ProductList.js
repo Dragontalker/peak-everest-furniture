@@ -27,7 +27,7 @@ function ProductList(props) {
     <div className="admin-product-list table-responsive">
       <div className="header">
         <h5>Product List</h5> 
-        <button className="btn btn-sm btn-dark">Add New Product</button>
+        <button className="btn btn-sm btn-dark" onClick={() => props.setPopupProduct({})}>Add New Product</button>
       </div>
       
       <table className="table table-sm">
@@ -53,7 +53,7 @@ function ProductList(props) {
               <td>{product.unitsSold}</td>
               <td>${product.profit}</td>
               <td className="text-end">
-                <button className="btn btn-sm btn-outline-dark">Edit</button>
+                <button className="btn btn-sm btn-outline-dark" onClick={() => props.setPopupProduct(product)}>Edit</button>
               </td>
             </tr>
           })}
