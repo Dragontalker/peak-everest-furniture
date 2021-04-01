@@ -41,6 +41,11 @@
         "heading": "Bekant",
         "description": "This sturdy desk is built to outlast years of coffee and hard work. You get a generous work surface and a clever solution to keep cords in place underneath.",
         "image": ["https://www.ikea.com/ca/en/images/products/bekant-desk-black-stained-ash-veneer-black__0736414_pe740529_s5.jpg?f=s", "https://www.ikea.com/ca/en/images/products/bekant-desk-black-stained-ash-veneer-black__0853167_pe714690_s5.jpg?f=g", "https://www.ikea.com/ca/en/images/products/bekant-desk-black-stained-ash-veneer-black__0735086_pe739739_s5.jpg?f=g", "https://www.ikea.com/ca/en/images/products/bekant-desk-black-stained-ash-veneer-black__0855886_pe714484_s5.jpg?f=g"],
-        "price": 200
+        "price": 200,
+        "rating": 4,
+        "reviews": [ 
+            { "name": "Fil", "rating": 4, "review": "Was awesome" },
+            { "name": "Jane", "rating": 2, "review": "Broke after second use, returned." }
+        ]
     }
 ]
