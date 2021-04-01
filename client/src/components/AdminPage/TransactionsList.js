@@ -37,7 +37,7 @@ function TransactionsList(props) {
               <td>{entry.userid}</td>
               <td>{entry.productid}</td>
               <th>{entry.productname}</th>
-              <td>--/--/----</td>
+              <td>{new Date(entry.timestamp).toLocaleDateString()} {new Date(entry.timestamp).toLocaleTimeString()}</td>
               <td className="text-end"><button className="btn btn-sm btn-outline-dark">Delivered</button></td>
             </tr>
           )}
