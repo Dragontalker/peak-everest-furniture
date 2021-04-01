@@ -29,28 +29,12 @@
     right: 2rem;
 }
 
-/* .carousel-indicators button {
-    box-sizing: content-box;
-    flex: 0 1 auto;
-    width: 30px;
-    height: 3px;
-    padding: 0;
-    margin-left: 3px;
-    margin-right: 3px;
-    text-indent: -999px;
-    cursor: pointer;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    opacity: 0.3;
-    transition: opacity 0.6s ease;
+.carousel .dot {
+    width: 30px !important;
+    height: 3px !important;
+    border-radius: 0 !important;
+    margin: 0 4px !important;
 }
-
-.carousel-indicators .active {
-    opacity: 0.8;
-} */
 
 /* PRODUCTS LIST */
 .shop-card {
