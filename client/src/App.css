@@ -48,7 +48,7 @@ body {
   white-space: nowrap;
   padding: 0.2rem 0.5rem;
   overflow-y: auto;
-  background-color: rgb(116, 117, 122);
+  background-color: rgb(68, 68, 73);
   color: rgb(244, 247, 250);
   z-index: 20;
   animation: sideopen 0.3s;
@@ -79,10 +79,30 @@ body {
 .shop-cart-item {
   padding: 0;
   border: none;
-  margin-bottom: 0.4rem;
-  border-radius: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  background: none;
+  color: rgb(244, 247, 250);
+  border-bottom: 1px solid rgb(160, 160, 160);
+}
+
+.shop-cart-item a {
+  color: rgb(190, 205, 219);
 }
 
 .shop-cart-item img{
   max-height: 80px;
+}
+
+.checkout-container {
+  position: absolute;
+  bottom: 1rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid rgb(160, 160, 160);
+}
+
+.checkout-container .btn {
+  width: 100%;
 }

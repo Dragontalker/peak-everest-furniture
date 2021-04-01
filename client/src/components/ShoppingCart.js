@@ -24,10 +24,10 @@ function ShoppingCart() {
   useEffect(() => {
     // fetch cartData using userid
     setCartData([
-      {id:"123a", productid:"1203-2343", heading:"Bosch Refrigerator", transactionid:"111"},
-      {id:"321b", productid:"1203-2344", heading:"Graco SnugRide", transactionid:"222"}
+      {id:"123a", productid:"1203-2343", price:10.95, heading:"Bosch Refrigerator", transactionid:"111"},
+      {id:"321b", productid:"1203-2344", price:12.45, heading:"Graco SnugRide", transactionid:"222"}
     ]);
-  }, [cartData])
+  }, [])
 
   // async function handleCheckout(id) {
   //   console.log("checkout shopping cart item", id);
@@ -45,12 +45,20 @@ function ShoppingCart() {
     setCartData([]);
   }
 
+  function calculateTotal() {
+    let total = 0;
+    cartData.forEach(entry => {
+      total += entry.price;
+    })
+    return total.toFixed(2);
+  }
+
   if (visible) {
     return(
       <div className="shop-cart-body" ref={shoppingCart}>
         <h4 className="mt-2 mb-3">Shopping Cart</h4>
         <ul className="list-group">
-          {store.shoppingCart.map(item => 
+          {cartData.map(item => 
             <li className="list-group-item d-flex shop-cart-item" key={item.id}>
               <div className="flex-fill ms-2 mt-1" style={{transform:"rotate(0)"}}>
                 <h5 className="card-text">
@@ -59,11 +67,15 @@ function ShoppingCart() {
                 <Link className="stretched-link" to={"/product/"+item.productid} 
                   onClick={() => setStore({type:"toggle-shop-cart"})}>Go to product page</Link>
               </div>
-              <button className="btn btn-outline-danger" onClick={() => handleCancel(item.id)}>Cancel</button>
+              <button className="btn btn-danger" onClick={() => handleCancel(item.id)}>Cancel</button>
             </li>
           )}
         </ul>
-        <button className="btn btn-light">Checkout</button>
+        <div className="checkout-container">
+          <p>Total: ${calculateTotal()} </p>
+          <button className="btn btn-light">Checkout</button>
+        </div>
+        
       </div>
     )
   }

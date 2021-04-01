@@ -2,6 +2,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./shop.css"
 import { useEffect, useState } from 'react'
+import { Link } from "react-router-dom";
 
 
 const bannerData = [
@@ -52,7 +53,7 @@ function ShopPage() {
                   <div className="card-body">
                     <h5 className="card-title">{product.heading}</h5>
                     <p className="card-text"> ${product.price}</p>
-                    <a href={"/product/"+product.id} className="stretched-link">See Product</a>
+                    <Link to={"/product/"+product.id} className="stretched-link">See Product</Link>
                   </div>
                 </div>
               </div>
