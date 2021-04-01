@@ -1,6 +1,7 @@
 
 const testProducts = require("../db/seed.json");
 const testTrans = require("../db/transactionsSeed.json");
+const testUsers = require('../db/testusers.json')
 
 function apiRoutes(app) {
 
@@ -20,6 +21,14 @@ function apiRoutes(app) {
     res.send(testTrans);
   })
 
+  app.get('/api/users', (req, res) => {
+    console.log("[API Call] Fetching all user info");
+    res.send(testUsers)
+  })
+
+  app.post('api/users', (req, res) => {
+    console.log(req)
+  })
 }
 
 module.exports = apiRoutes;

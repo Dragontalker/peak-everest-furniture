@@ -10,7 +10,10 @@ function ShoppingCart() {
   const [store, setStore] = useStoreContext();
 
   useEffect(() => {
-    if (store.openShopCart) setVisible(true);
+    if (store.openShopCart) {
+      refreshData();
+      setVisible(true);
+    }
     else if (visible && !store.openShopCart) {
       shoppingCart.current.classList.add("shop-cart-close");
       setTimeout(() => { 
@@ -21,16 +24,14 @@ function ShoppingCart() {
     // eslint-disable-next-line
   }, [store.openShopCart])
 
-  useEffect(() => {
-    if (store.loggedIn) {
-      // fetch cartData using userid
-      console.log("fetching cart data");
-      setCartData([
-        {id:"123a", productid:"1203-2343", price:10.95, heading:"Bosch Refrigerator", transactionid:"111"},
-        {id:"321b", productid:"1203-2344", price:12.45, heading:"Graco SnugRide", transactionid:"222"}
-      ]);
-    }
-  }, [store.loggedIn])
+  async function refreshData() {
+    // fetch cartData using userid
+    console.log("fetching cart data");
+    setCartData([
+      {id:"123a", productid:"1203-2343", price:10.95, heading:"Bosch Refrigerator", transactionid:"111"},
+      {id:"321b", productid:"1203-2344", price:12.45, heading:"Graco SnugRide", transactionid:"222"}
+    ]);
+  }
 
   async function handleCheckout() {
     console.log("checkout all shopping cart items");
@@ -59,6 +60,7 @@ function ShoppingCart() {
 
   if (visible) {
     return(
+      <>
       <div className="shop-cart-body" ref={shoppingCart}>
         <h4 className="mt-2 mb-3">Shopping Cart</h4>
         <ul className="list-group">
@@ -83,8 +85,9 @@ function ShoppingCart() {
           <p>Total: ${calculateTotal()} </p>
           <button className="btn btn-light" onClick={handleCheckout}>Checkout</button>
         </div>
-        
       </div>
+      <div className="back-cover" onClick={() => setStore({type:"toggle-shop-cart"})}></div>
+      </>
     )
   }
   else return null;
