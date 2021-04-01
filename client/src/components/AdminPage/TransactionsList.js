@@ -18,7 +18,16 @@ function TransactionsList(props) {
 
   async function transSold(id) {
     console.log("set transaction with id " + id + " to status SOLD");
-    // SET transaction with id to sold
+    let transData = {};
+    props.trans.forEach(entry => entry.id === id ? transData=entry : '');
+    transData.status = "SOLD";
+    const res = await fetch(`/api/transactions/${id}`, {
+      method: "PUT",
+      headers: { 'Content-Type': 'application/json', 'userid': '123' },
+      body: JSON.stringify(transData)
+    });
+    console.log(res);
+
     props.refreshData();
   }
 

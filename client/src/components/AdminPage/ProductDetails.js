@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function ProductDetails(props) {
 
@@ -8,8 +8,59 @@ function ProductDetails(props) {
   const [description, setDescription] = useState(props.product.description);
   const [images, setImages] = useState(props.product.image || []);
 
-  function handleAdd() {
+  useEffect(() => {
+    console.log("scroll to top")
+    window.scrollTo(0,80);
+  }, [props])
+
+  async function handleAdd() {
     console.log("Adding this product");
+    const data = {
+      heading: heading,
+      price: price,
+      quantity: inventory,
+      description: description,
+      images: images
+    }
+    const res = await fetch("/api/products", {
+      method:"POST",
+      headers: { 'Content-Type': 'application/json', 'userid': '123' },
+      body: JSON.stringify(data)
+    }).then(r => r.json());
+    console.log(res);
+
+    props.refreshData();
+    props.setPopupProduct(null);
+  }
+
+  async function handleUpdate() {
+    console.log("Updating product", props.product.id);
+    const data = {
+      heading: heading,
+      price: price,
+      quantity: inventory,
+      description: description,
+      images: images
+    }
+    const res = await fetch(`/api/products/${props.product.id}`, {
+      method:"PUT",
+      headers: { 'Content-Type': 'application/json', 'userid': '123' },
+      body: JSON.stringify(data)
+    }).then(r => r.json());
+    console.log(res);
+
+    props.refreshData();
+    props.setPopupProduct(null);
+  }
+
+  async function handleDelete() {
+    console.log("Deleting product", props.product.id);
+    const res = await fetch(`/api/products/${props.product.id}`, {
+      method:"DELETE",
+      headers: { 'userid': '123' },
+    }).then(r => r.json());
+    console.log(res);
+
     props.refreshData();
     props.setPopupProduct(null);
   }
@@ -18,18 +69,6 @@ function ProductDetails(props) {
     let newArr = images;
     newArr[idx] = e.target.value;
     setImages([...newArr]);
-  }
-
-  function handleUpdate() {
-    console.log("Updating product", props.product.id);
-    props.refreshData();
-    props.setPopupProduct(null);
-  }
-
-  function handleDelete() {
-    console.log("Deleting product", props.product.id);
-    props.refreshData();
-    props.setPopupProduct(null);
   }
 
   return(
