@@ -16,7 +16,7 @@ function apiRoutes(app) {
     // if userid does not have admin access:
     if (false) res.send({error:"Access denied"});
     console.log("Product info:", req.body);
-    res.send({ message:"Added new product" });
+    res.send({ success:"Added new product" });
   })
 
   app.get("/api/products/:id", (req,res) => {
@@ -31,7 +31,7 @@ function apiRoutes(app) {
     // if userid does not have admin access:
     if (false) res.send({error:"Access denied"});
     console.log("Product info:", req.body);
-    res.send({ message:"Product info updated" });
+    res.send({ success:"Product info updated" });
   })
 
   app.delete("/api/products/:id", (req,res) => {
@@ -39,7 +39,7 @@ function apiRoutes(app) {
     console.log("Checking credentials:", req.headers.userid);
     // if userid does not have admin access:
     if (false) res.send({error:"Access denied"});
-    res.send({ message:"Product successfully deleted" });
+    res.send({ success:"Product successfully deleted" });
   })
 
   app.get("/api/transactions", (req,res) => {
@@ -50,13 +50,13 @@ function apiRoutes(app) {
   app.post("/api/transactions", (req,res) => {
     console.log("[API Call] Adding new transaction");
     console.log("Adding transaction:", req.body);
-    res.send({ message:"New transaction added" });
+    res.send({ success:"New transaction added" });
   })
 
   app.put("/api/transactions/:id", (req,res) => {
     console.log("[API Call] Edit existing transaction", req.params.id);
     console.log("New transaction info", req.body);
-    res.send({ message:"Transaction successfully edited" });
+    res.send({ success:"Transaction successfully edited" });
   })
 
   app.post('/api/users', (req, res) => {
@@ -64,7 +64,7 @@ function apiRoutes(app) {
     console.log(req.body);
     // check if email is already in DB
     if (false) res.send({ error:"Email already exists", emailAlreadyExists:true });
-    res.send({ message: "Successfully added new user"});
+    res.send({ success:"Successfully added new user"});
   })
 }
 

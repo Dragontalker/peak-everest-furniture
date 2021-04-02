@@ -10,7 +10,7 @@ function RegisterPage() {
   const pwInputDiv = useRef(null);
   const repwInputDiv = useRef(null);
 
-  async function checkValidateEmail() {
+  function checkValidateEmail() {
     const email = emailInputDiv.current.value;
     // check if email is formatted properly
     const regex = new RegExp('.+@.+\\..+');
@@ -73,7 +73,7 @@ function RegisterPage() {
     else setSuccessMsg("Registration successful.");
   }
 
-  return(
+  return (
     <div className="card mt-3 login-body">
       <div className="card-body">
         <h5 className="card-title mb-3">Sign Up</h5>
