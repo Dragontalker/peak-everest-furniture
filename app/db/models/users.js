@@ -12,7 +12,12 @@ let users = new Schema ({
    // favourites: [{
    //    thumbId: mongoose.Types.ObjectId,
    //    favouriteTime: {type: Date, default: Date.now} }]
-   cart: [{ id: Schema.Types.ObjectId, num: Number, price: Number }]
+   cart: [{ 
+      transactionId: Schema.Types.ObjectId, 
+      productId: Schema.Types.ObjectId, 
+      heading: String, 
+      price: Number 
+   }]
 
 }, {
    timestamps: true /* creates corresponding timestamp fields: createdAt, updatedAt */
