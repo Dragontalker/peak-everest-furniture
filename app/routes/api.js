@@ -59,14 +59,12 @@ function apiRoutes(app) {
     res.send({ message:"Transaction successfully edited" });
   })
 
-  // Dangerous API call, should be removed before release
-  app.get('/api/users', (req, res) => {
-    console.log("[API Call] Fetching all user info");
-    res.send(testUsers)
-  })
-
-  app.post('api/users', (req, res) => {
-    console.log(req.body)
+  app.post('/api/users', (req, res) => {
+    console.log("[API Call] Adding new user info");
+    console.log(req.body);
+    // check if email is already in DB
+    if (false) res.send({ error:"Email already exists", emailAlreadyExists:true });
+    res.send({ message: "Successfully added new user"});
   })
 }
 
