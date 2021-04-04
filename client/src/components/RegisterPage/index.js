@@ -56,7 +56,7 @@ function RegisterPage() {
     if (!checkValidatePassword()) return;
     // submit user info to DB
     const userInfo = {
-      displayName: nameInputDiv.current.value,
+      name: nameInputDiv.current.value,
       email: emailInputDiv.current.value,
       password: pwInputDiv.current.value
     };
@@ -68,7 +68,7 @@ function RegisterPage() {
     // handle error
     if (res.emailAlreadyExists) {
       emailInputDiv.current.classList.add("is-invalid");
-      setEmailErr("You are already registered");
+      setEmailErr("This account already exists");
     }
     else setSuccessMsg("Registration successful.");
   }

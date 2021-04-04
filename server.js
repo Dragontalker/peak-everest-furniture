@@ -9,6 +9,7 @@ app.use(cors());
 
 const PORT = process.env.PORT || 8080;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mernCommerce';
+let onlineUsers = {};
 
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
@@ -35,7 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // connect to route file for API handling
-require('./app/routes/api.js')(app);
+require('./app/routes/api.js')(app, onlineUsers);
 
 // display all pages from react
 app.get('*', (req, res) => {

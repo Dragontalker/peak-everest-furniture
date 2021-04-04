@@ -4,7 +4,6 @@ function ProductDetails(props) {
 
   const [heading, setHeading] = useState(props.product.heading);
   const [price, setPrice] = useState(props.product.price);
-  const [inventory, setInventory] = useState(props.product.quantity);
   const [description, setDescription] = useState(props.product.description);
   const [images, setImages] = useState(props.product.image || []);
 
@@ -18,13 +17,12 @@ function ProductDetails(props) {
     const data = {
       heading: heading,
       price: price,
-      quantity: inventory,
       description: description,
       images: images
     }
     const res = await fetch("/api/products", {
       method:"POST",
-      headers: { 'Content-Type': 'application/json', 'userid': '123' },
+      headers: { 'Content-Type': 'application/json', 'sessionId':localStorage.getItem("sessionId") },
       body: JSON.stringify(data)
     }).then(r => r.json());
     console.log(res);
@@ -38,13 +36,12 @@ function ProductDetails(props) {
     const data = {
       heading: heading,
       price: price,
-      quantity: inventory,
       description: description,
       images: images
     }
     const res = await fetch(`/api/products/${props.product.id}`, {
       method:"PUT",
-      headers: { 'Content-Type': 'application/json', 'userid': '123' },
+      headers: { 'Content-Type': 'application/json', 'sessionId':localStorage.getItem("sessionId") },
       body: JSON.stringify(data)
     }).then(r => r.json());
     console.log(res);
@@ -85,8 +82,6 @@ function ProductDetails(props) {
               <div className="col-4">
                 <label className="form-label">Price</label>
                 <input type="number" value={price} onChange={e => setPrice(e.target.value)} className="form-control" />
-                <label className="form-label">Inventory</label>
-                <input type="number" value={inventory} onChange={e => setInventory(e.target.value)} className="form-control" />
               </div>
               <div className="col-12  mb-2">
                 <label className="form-label">Description</label>

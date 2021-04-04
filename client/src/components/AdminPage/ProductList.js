@@ -36,7 +36,6 @@ function ProductList(props) {
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Price</th>
-            <th scope="col">Inventory</th>
             <th scope="col">Units Sold</th>
             <th scope="col">Profit</th>
             <th scope="col"></th>
@@ -49,7 +48,6 @@ function ProductList(props) {
               <td>{product.id}</td>
               <th>{product.heading}</th>
               <td>{product.price}</td>
-              <td>{product.quantity}</td>
               <td>{product.unitsSold}</td>
               <td>${product.profit}</td>
               <td className="text-end">
@@ -61,7 +59,7 @@ function ProductList(props) {
 
         <tfoot>
           <tr>
-            <td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td>
             <th scope="row">Total:</th>
             <td>${total}</td>
             <td></td>

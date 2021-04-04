@@ -46,15 +46,15 @@ function ShopPage() {
         <h1>All Products</h1>
           <div className="row">
             {products && products.map((product, idx) => 
-              <div key={idx} className="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div key={idx} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-2">
                 <div className="card">
                   <div className="shop-card-img">
                     <img src={product.image[0]} className="card-img-top img-fluid" alt={product.heading} />
                   </div>
                   <div className="card-body">
                     <h5 className="card-title">{product.heading}</h5>
-                    <p className="card-text"> ${product.price}</p>
-                    <Link to={"/product/"+product.id} className="stretched-link">See Product</Link>
+                    <p className="card-text">${product.price}</p>
+                    <Link to={"/product/"+product._id} className="stretched-link">See Product</Link>
                   </div>
                 </div>
               </div>

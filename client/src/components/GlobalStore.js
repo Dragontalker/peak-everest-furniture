@@ -31,6 +31,13 @@ const StoreContext = createContext();
 
 const StoreProvider = function(props){
   const [state, dispatch] = useReducer( dataReducer, initialData );
+  // when a new session launches
+  useEffect(() => {
+    // check if user already logged in before
+    const oldSession = localStorage.getItem("sessionId");
+    if (oldSession) dispatch({type:"login"});
+  }, [])
+
   useEffect(() => {
     // add listeners for window resize
     function handleResize() { dispatch({type:"resize"}) };

@@ -15,7 +15,13 @@ function AdminPage() {
 
   useEffect(() => {
     // redirect if userID is not admin user
-    setAccess(true);
+    async function isAdmin() {
+      let sessionId = localStorage.getItem("sessionId")
+      let res = await fetch(`/api/users/${sessionId}`).then(r => r.json());
+      if (res.isAdmin) return true;
+      return false;
+    }
+    if (isAdmin) setAccess(true);
     refreshData();
   }, [])
 
@@ -25,7 +31,10 @@ function AdminPage() {
     if (prodRes.error) console.log(prodRes.error);
     else setProducts(prodRes);
     // fetch transaction info
-    const transRes = await fetch("/api/transactions").then(r => r.json());
+    const transRes = await fetch("/api/transactions", {
+      method: "GET",
+      headers: { "sessionId":localStorage.getItem("sessionId") }
+    }).then(r => r.json());
     if (transRes.error) console.log(transRes.error);
     else setTrans(transRes);
   }
