@@ -24,6 +24,7 @@ function LoginPage() {
       console.log(res);
       localStorage.setItem("sessionId", res.sessionId);
       setStore({type:"login"});
+      window.location.replace("/");
     }
   }
 

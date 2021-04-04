@@ -8,7 +8,7 @@ function ProductDetails(props) {
   const [images, setImages] = useState(props.product.image || []);
 
   useEffect(() => {
-    console.log("scroll to top")
+    // scroll to top on load
     window.scrollTo(0,80);
   }, [props])
 
@@ -22,7 +22,7 @@ function ProductDetails(props) {
     }
     const res = await fetch("/api/products", {
       method:"POST",
-      headers: { 'Content-Type': 'application/json', 'sessionId':localStorage.getItem("sessionId") },
+      headers: { 'Content-Type': 'application/json', 'sessionid':localStorage.getItem("sessionId") },
       body: JSON.stringify(data)
     }).then(r => r.json());
     console.log(res);
@@ -32,16 +32,16 @@ function ProductDetails(props) {
   }
 
   async function handleUpdate() {
-    console.log("Updating product", props.product.id);
+    console.log("Updating product", props.product._id);
     const data = {
       heading: heading,
       price: price,
       description: description,
       images: images
     }
-    const res = await fetch(`/api/products/${props.product.id}`, {
+    const res = await fetch(`/api/products/${props.product._id}`, {
       method:"PUT",
-      headers: { 'Content-Type': 'application/json', 'sessionId':localStorage.getItem("sessionId") },
+      headers: { 'Content-Type': 'application/json', 'sessionid':localStorage.getItem("sessionId") },
       body: JSON.stringify(data)
     }).then(r => r.json());
     console.log(res);
@@ -51,10 +51,10 @@ function ProductDetails(props) {
   }
 
   async function handleDelete() {
-    console.log("Deleting product", props.product.id);
-    const res = await fetch(`/api/products/${props.product.id}`, {
+    console.log("Deleting product", props.product._id);
+    const res = await fetch(`/api/products/${props.product._id}`, {
       method:"DELETE",
-      headers: { 'userid': '123' },
+      headers: { 'sessionid':localStorage.getItem("sessionId") },
     }).then(r => r.json());
     console.log(res);
 
@@ -96,7 +96,7 @@ function ProductDetails(props) {
                 <input type="text" value={images[3]} onChange={e => updateImagesArr(e, 3)} className="form-control mb-2" />
               </div>
               <div className="col-12 mb-2 mx-auto">
-                {props.product.id ? 
+                {props.product._id ? 
                   <div className="btn-group">
                     <button className="btn btn-dark" onClick={handleUpdate}>Update Product</button>
                     <button className="btn btn-danger" onClick={handleDelete}>Delete Product</button>

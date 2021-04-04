@@ -34,9 +34,18 @@ const StoreProvider = function(props){
   // when a new session launches
   useEffect(() => {
     // check if user already logged in before
-    const oldSession = localStorage.getItem("sessionId");
-    if (oldSession) dispatch({type:"login"});
+    handleOldSession();
   }, [])
+
+  async function handleOldSession() {
+    const oldSession = localStorage.getItem("sessionId");
+    const res = await fetch(`/api/users/${oldSession}`).then(r => r.json());
+    if (res.error) {
+      console.log(res.error);
+      localStorage.removeItem("sessionId");
+    }
+    else dispatch({type:"login"});
+  }
 
   useEffect(() => {
     // add listeners for window resize

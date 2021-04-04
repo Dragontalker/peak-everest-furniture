@@ -1,7 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const db = require("../db/models");
 
-const testProducts = require("../db/seed.json");
 const testTrans = require("../db/transactionsSeed.json");
 
 function apiRoutes(app, onlineUsers) {
@@ -17,8 +16,9 @@ function apiRoutes(app, onlineUsers) {
   app.post("/api/products", async (req,res) => {
     console.log("[API Call] Post new product info");
     console.log("Checking credentials:", req.headers.sessionid);
-    if (onlineUsers[req.headers.sessionId].isAdmin) {
-      await new db.products(body).save();
+    const checkUser = {...onlineUsers[req.headers.sessionid]}._doc;
+    if (checkUser.isAdmin) {
+      await new db.products(req.body).save();
       res.send({ success:"Added new product" });
     }
     // if session does not have admin access
@@ -32,18 +32,26 @@ function apiRoutes(app, onlineUsers) {
     res.send(filteredproduct);
   })
 
-  app.put("/api/products/:id", (req,res) => {
+  app.put("/api/products/:id", async (req,res) => {
     console.log("[API Call] Edit product info for:", req.params.id);
     console.log("Checking credentials:", req.headers.sessionid);
-    if (onlineUsers[req.headers.sessionId].isAdmin) res.send({ success:"Product info updated" });
+    const checkUser = {...onlineUsers[req.headers.sessionid]}._doc;
+    if (checkUser.isAdmin) {
+      await db.products.updateOne({_id:req.params.id}, req.body);
+      res.send({ success:"Product info updated" });
+    }
     // if session does not have admin access
     else res.send({error:"Access denied"});
   })
 
-  app.delete("/api/products/:id", (req,res) => {
+  app.delete("/api/products/:id", async (req,res) => {
     console.log("[API Call] Deleting product info for:", req.params.id);
     console.log("Checking credentials:", req.headers.sessionid);
-    if (onlineUsers[req.headers.sessionId].isAdmin) res.send({ success:"Product successfully deleted" });
+    const checkUser = {...onlineUsers[req.headers.sessionid]}._doc;
+    if (checkUser.isAdmin) {
+      await db.products.deleteOne({ _id:req.params.id });
+      res.send({ success:"Product successfully deleted" });
+    }
     // if session does not have admin access
     else res.send({error:"Access denied"});
   })
@@ -53,8 +61,8 @@ function apiRoutes(app, onlineUsers) {
   app.get("/api/transactions", (req,res) => {
     console.log("[API Call] Fetching all transactions info");
     console.log("Checking credentials:", req.headers.sessionid);
-    if (!onlineUsers[req.headers.sessionid]) res.send({error:"User not found"});
-    else if (onlineUsers[req.headers.sessionid].isAdmin) res.send(testTrans);
+    const checkUser = {...onlineUsers[req.headers.sessionid]}._doc;
+    if (checkUser.isAdmin) res.send(testTrans);
     // if session does not have admin access
     else res.send({error:"Access denied"});
   })

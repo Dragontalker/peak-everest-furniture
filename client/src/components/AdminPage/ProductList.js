@@ -45,9 +45,9 @@ function ProductList(props) {
         <tbody>
           {products.map((product,idx) => {
             return <tr key={idx}>
-              <td>{product.id}</td>
+              <td>{product._id}</td>
               <th>{product.heading}</th>
-              <td>{product.price}</td>
+              <td>${product.price}</td>
               <td>{product.unitsSold}</td>
               <td>${product.profit}</td>
               <td className="text-end">

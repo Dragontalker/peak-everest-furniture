@@ -15,14 +15,17 @@ function AdminPage() {
 
   useEffect(() => {
     // redirect if userID is not admin user
-    async function isAdmin() {
+    async function checkUser() {
       let sessionId = localStorage.getItem("sessionId")
       let res = await fetch(`/api/users/${sessionId}`).then(r => r.json());
-      if (res.isAdmin) return true;
-      return false;
+      if (res.isAdmin) {
+        console.log("Welcome admin");
+        setAccess(true);
+        refreshData();
+      }
+      else console.log("Access denied");
     }
-    if (isAdmin) setAccess(true);
-    refreshData();
+    checkUser();
   }, [])
 
   async function refreshData() {
