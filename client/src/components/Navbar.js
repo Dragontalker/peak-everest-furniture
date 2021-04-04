@@ -1,9 +1,24 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useStoreContext } from "./GlobalStore";
 
 function Navbar() {
 
   const [store, updateStore] = useStoreContext();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    checkUser();
+  },[])
+
+  async function checkUser() {
+    const sessionId = localStorage.getItem("sessionId");
+    if (sessionId) {
+      const res = await fetch(`/api/users/${sessionId}`).then(r => r.json());
+      console.log("Is admin check:", res);
+      if (res.isAdmin) setIsAdmin(true);
+    }
+  }
 
   async function handleLogout() {
     if (store.openShopCart) updateStore({type:"toggle-shop-cart"});
@@ -25,7 +40,9 @@ function Navbar() {
     if (store.winX > 800 && store.loggedIn) return(
       <div className="navbar-nav">
         <NavLink exact to="/" className="nav-link" activeClassName="disabled">Home</NavLink>
+        {isAdmin ? <NavLink to="/admin" className="nav-link" activeClassName="disabled">Administration</NavLink> : 
         <button className="btn nav-link" onClick={openShopCart}>Shopping Cart</button>
+        }
         <button className="btn nav-link" onClick={handleLogout}>Logout</button>
       </div>
     )

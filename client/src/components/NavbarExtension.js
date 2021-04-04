@@ -7,6 +7,7 @@ function NavbarExtension() {
   const navExt = useRef(null);
   const [store, updateStore] = useStoreContext();
   const [visible, setVisible] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (store.openNavExt) setVisible(true);
@@ -19,6 +20,19 @@ function NavbarExtension() {
     }
     // eslint-disable-next-line
   }, [store.openNavExt])
+
+  useEffect(() => {
+    checkUser();
+  },[])
+
+  async function checkUser() {
+    const sessionId = localStorage.getItem("sessionId");
+    if (sessionId) {
+      const res = await fetch(`/api/users/${sessionId}`).then(r => r.json());
+      console.log("Is admin check:", res);
+      if (res.isAdmin) setIsAdmin(true);
+    }
+  }
 
   function closeExt() { updateStore({type:"toggle-nav-ext"}); }
 
@@ -37,7 +51,9 @@ function NavbarExtension() {
     if (store.loggedIn) return(
       <div className="navbar-nav col">
         <NavLink exact to="/" className="nav-link" activeClassName="disabled" onClick={closeExt}>Home</NavLink>
+        {isAdmin ? <NavLink to="/admin" className="nav-link" activeClassName="disabled">Administration</NavLink> : 
         <button className="btn nav-link" onClick={openShopCart} style={{textAlign:"right"}}>Shopping Cart</button>
+        }
         <button className="btn nav-link" onClick={logout} style={{textAlign:"right"}}>Logout</button>
       </div>
     )
