@@ -1,8 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const db = require("../db/models");
 
-const testTrans = require("../db/transactionsSeed.json");
-
 function apiRoutes(app, onlineUsers) {
   /* -------------------- */
   /* -- PRODUCT ROUTES -- */
@@ -58,24 +56,38 @@ function apiRoutes(app, onlineUsers) {
   /* ------------------------ */
   /* -- TRANSACTION ROUTES -- */
   /* ------------------------ */
-  app.get("/api/transactions", (req,res) => {
+  app.get("/api/transactions", async (req,res) => {
     console.log("[API Call] Fetching all transactions info");
     console.log("Checking credentials:", req.headers.sessionid);
     const checkUser = {...onlineUsers[req.headers.sessionid]}._doc;
-    if (checkUser.isAdmin) res.send(testTrans);
+    if (checkUser.isAdmin) {
+      const data = await db.transactions.find({});
+      res.send(data);
+    }
     // if session does not have admin access
     else res.send({error:"Access denied"});
   })
 
-  app.post("/api/transactions", (req,res) => {
+  app.post("/api/transactions", async (req,res) => {
     console.log("[API Call] Adding new transaction");
-    console.log("Adding transaction:", req.body);
-    res.send({ success:"New transaction added" });
+    // find userID from userSession
+    if (onlineUsers[req.body.userSession]) {
+      const userId = onlineUsers[req.body.userSession]._id;
+      await new db.transactions({
+        userId:userId, 
+        productId:req.body.productId, 
+        productName:req.body.productName, 
+        status:req.body.status
+      }).save();
+      res.send({ success:"New transaction added" });
+    }
+    else res.send({ error:"Session not found" });
+    
   })
 
-  app.put("/api/transactions/:id", (req,res) => {
+  app.put("/api/transactions/:id", async (req,res) => {
     console.log("[API Call] Edit existing transaction", req.params.id);
-    console.log("New transaction info", req.body);
+    await db.transactions.updateOne({_id:req.params.id}, req.body);
     res.send({ success:"Transaction successfully edited" });
   })
   /* ----------------- */

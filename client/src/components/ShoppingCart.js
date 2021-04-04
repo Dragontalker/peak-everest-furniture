@@ -28,14 +28,24 @@ function ShoppingCart() {
     // fetch cartData using userid
     console.log("fetching cart data");
     setCartData([
-      {id:"123a", productid:"1203-2343", price:10.95, heading:"Bosch Refrigerator", transactionid:"111"},
-      {id:"321b", productid:"1203-2344", price:12.45, heading:"Graco SnugRide", transactionid:"222"}
+      {_id:"123a", productId:"1203-2343", price:10.95, heading:"Bosch Refrigerator"},
+      {_id:"321b", productId:"1203-2344", price:12.45, heading:"Graco SnugRide"}
     ]);
   }
 
   async function handleCheckout() {
     console.log("checkout all shopping cart items");
-    // SET transaction status to "BOUGHT"
+    let sessionId = localStorage.getItem("sessionId");
+    // NEW transactions for ALL items in cart (status:"BOUGHT")
+    const res = await fetch("/api/transactions", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        userSession:sessionId, 
+        status:"BUYING"
+      })
+    })
+    console.log(res);
     // REMOVE entry from shopping cart
     // FETCH new shoppingcart
     setCartData([]);
@@ -46,7 +56,7 @@ function ShoppingCart() {
     // SET transaction status to "CANCELLED"
     // REMOVE entry from shopping cart
     // FETCH new shoppingcart
-    let newCart = cartData.filter(entry => entry.id !== id);
+    let newCart = cartData.filter(entry => entry._id !== id);
     setCartData(newCart);
   }
 
@@ -66,17 +76,17 @@ function ShoppingCart() {
         <ul className="list-group">
           {cartData.length ? '' : <span className="text-muted">No items in your cart </span> }
           {cartData.map(item => 
-            <li className="list-group-item d-flex shop-cart-item" key={item.id}>
+            <li className="list-group-item d-flex shop-cart-item" key={item._id}>
               <div className="flex-fill ms-2 mt-1" style={{transform:"rotate(0)"}}>
                 <p className="card-text">
                   {item.heading.length < 23 ? item.heading : item.heading.slice(0,22) + "..."}
                 </p>
-                <Link className="stretched-link" to={"/product/"+item.productid} 
+                <Link className="stretched-link" to={"/product/"+item.productId} 
                   onClick={() => setStore({type:"toggle-shop-cart"})}>Go to product page</Link>
               </div>
               <div className="mt-auto">
                 <p className="text-end me-2">${item.price}</p>
-                <button className="btn btn-sm link-danger" onClick={() => handleCancel(item.id)}>Remove</button>
+                <button className="btn btn-sm link-danger" onClick={() => handleCancel(item._id)}>Remove</button>
               </div>
             </li>
           )}

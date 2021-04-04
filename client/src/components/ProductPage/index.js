@@ -37,6 +37,18 @@ function ProductPage() {
     return shuffled.slice(0, 4);
   }
 
+  async function handleCheckout() {
+    let sessionId = localStorage.getItem("sessionId");
+    if (sessionId) {
+      // make new entry in cart
+    }
+    else {
+      // goto login screen
+      window.location.replace("/login");
+    }
+    
+  }
+
   return (
     <div>
       <div className="card mb-3 card-background">
@@ -71,7 +83,7 @@ function ProductPage() {
                   </div>
                 )}
               </div>
-              <button className="btn btn-dark product-button">Add to Cart</button>
+              <button className="btn btn-dark product-button" onClick={handleCheckout}>Add to Cart</button>
             </div>
           </div>
         </div>

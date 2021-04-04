@@ -13,7 +13,7 @@ function ProductList(props) {
       product.unitsSold = 0;
       product.profit = 0;
       props.trans.forEach(entry => {
-        if (product.id === entry.productid && (entry.status==="BOUGHT" || entry.status==="SOLD")) product.unitsSold += 1;
+        if (product._id === entry.productId && (entry.status==="BOUGHT" || entry.status==="SOLD")) product.unitsSold += 1;
       })
       product.profit = product.unitsSold*product.price;
       total += product.profit;

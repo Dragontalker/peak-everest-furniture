@@ -8,13 +8,13 @@ function Charts(props) {
   useEffect(() => {
     let newData = [];
     props.products.forEach(product => {
-      newData.push({ productid:product.id, bought:0, sold:0, cancelled:0 });
+      newData.push({ productid:product._id, bought:0, sold:0, cancelled:0 });
     });
     props.trans.forEach(entry => {
       newData.forEach(data => {
-        if (data.productid === entry.productid && entry.status === "BOUGHT") data.bought++;
-        else if (data.productid === entry.productid && entry.status === "SOLD") data.sold++;
-        else if (data.productid === entry.productid && entry.status === "CANCELLED") data.cancelled++;
+        if (data.productid === entry.productId && entry.status === "BOUGHT") data.bought++;
+        else if (data.productid === entry.productId && entry.status === "SOLD") data.sold++;
+        else if (data.productid === entry.productId && entry.status === "CANCELLED") data.cancelled++;
       })
     })
     setTransData(newData);
