@@ -127,7 +127,6 @@ function apiRoutes(app, onlineUsers) {
         await db.users.updateOne({_id:user._id}, { $push: {cart:newItem} });
         // replace user info in onlineUsers with updated version
         onlineUsers[req.params.id] = await db.users.findOne({_id:user._id});
-        console.log("new cart:", onlineUsers);
       }
       if (req.body.status === "CANCEL") {
         console.log("Remove one product from cart", req.body);
@@ -138,8 +137,17 @@ function apiRoutes(app, onlineUsers) {
         onlineUsers[req.params.id] = await db.users.findOne({_id:user._id});
       }
       if (req.body.status === "CHECKOUT") {
-        // make new transaction entries for each product
         console.log("Remove all products from cart", req.body);
+        // make new transaction entries for each product
+        const newTrans = user.cart.map(item => {
+          return {
+            userId: user._id,
+            productId: item.productId,
+            productName: item.heading,
+            status: "BOUGHT"
+          }
+        })
+        await db.transactions.insertMany(newTrans);
         // remove all products from cart
         await db.users.updateOne({_id:user._id}, { cart:[] });
         // replace user info in onlineUsers with updated version
