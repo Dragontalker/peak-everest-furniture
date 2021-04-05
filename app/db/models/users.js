@@ -13,7 +13,6 @@ let users = new Schema ({
    //    thumbId: mongoose.Types.ObjectId,
    //    favouriteTime: {type: Date, default: Date.now} }]
    cart: [{ 
-      transactionId: Schema.Types.ObjectId, 
       productId: Schema.Types.ObjectId, 
       heading: String, 
       price: Number 

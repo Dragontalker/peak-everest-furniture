@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 const transactions = new Schema({
    userId: { type: Schema.Types.ObjectId, required: true },
    productId: { type: Schema.Types.ObjectId, required: true },
+   productName: { type: String, required: true },
    status: { type: String, required: true, trim: true }
 }, {
    timestamps: true /* creates corresponding timestamp fields: createdAt, updatedAt */

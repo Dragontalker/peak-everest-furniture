@@ -5,29 +5,20 @@ function TransactionsList(props) {
   const [trans, setTrans] = useState([]);
 
   useEffect(() => {
-    // remove transactions that are marked BUYING
+    // remove transactions that are marked BUYING, SOLD, or CANCELLED
     let transData = props.trans.filter(entry => entry.status === "BOUGHT");
-    // extend trans with product data
-    transData.forEach(entry => {
-      props.products.forEach(product => {
-        if (product.id === entry.productid) entry.productname = product.heading;
-      })
-    });
     setTrans(transData);
   },[props])
 
   async function transSold(id) {
     console.log("set transaction with id " + id + " to status SOLD");
-    let transData = {};
-    props.trans.forEach(entry => entry.id === id ? transData=entry : '');
-    transData.status = "SOLD";
+    // update status of transaction to SOLD
     const res = await fetch(`/api/transactions/${id}`, {
       method: "PUT",
-      headers: { 'Content-Type': 'application/json', 'userid': '123' },
-      body: JSON.stringify(transData)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status:"SOLD" })
     });
     console.log(res);
-
     props.refreshData();
   }
 
@@ -39,7 +30,6 @@ function TransactionsList(props) {
           <tr>
             <th scope="col">Transaction ID</th>
             <th scope="col">User ID</th>
-            <th scope="col">Product ID</th>
             <th scope="col">Product Name</th>
             <th scope="col">Time of sale</th>
             <th scope="col"></th>
@@ -47,14 +37,13 @@ function TransactionsList(props) {
         </thead>
         <tbody>
           {trans.map(entry => 
-            <tr key={entry.id}>
-              <td>{entry.id}</td>
-              <td>{entry.userid}</td>
-              <td>{entry.productid}</td>
-              <th>{entry.productname}</th>
-              <td>{new Date(entry.timestamp).toLocaleDateString()} {new Date(entry.timestamp).toLocaleTimeString()}</td>
+            <tr key={entry._id}>
+              <td>{entry._id}</td>
+              <td>{entry.userId}</td>
+              <th>{entry.productName}</th>
+              <td>{new Date(entry.updatedAt).toLocaleDateString()} {new Date(entry.updatedAt).toLocaleTimeString()}</td>
               <td className="text-end">
-                <button className="btn btn-sm btn-outline-dark" onClick={() => transSold(entry.id)}>
+                <button className="btn btn-sm btn-outline-dark" onClick={() => transSold(entry._id)}>
                   Delivery Sent
                 </button>
               </td>
