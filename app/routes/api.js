@@ -68,23 +68,6 @@ function apiRoutes(app, onlineUsers) {
     else res.send({error:"Access denied"});
   })
 
-  app.post("/api/transactions", async (req,res) => {
-    console.log("[API Call] Adding new transaction");
-    // find userID from userSession
-    if (onlineUsers[req.body.userSession]) {
-      const userId = onlineUsers[req.body.userSession]._id;
-      // add ALL products in cart to new transaction
-      // await new db.transactions({
-      //   userId:userId, 
-      //   productId:req.body.productId, 
-      //   productName:req.body.productName, 
-      //   status:req.body.status
-      // }).save();
-      res.send({ success:"New transactions added" });
-    }
-    else res.send({ error:"Session not found" });
-  })
-
   app.put("/api/transactions/:id", async (req,res) => {
     console.log("[API Call] Edit existing transaction", req.params.id);
     await db.transactions.updateOne({_id:req.params.id}, req.body);
@@ -94,8 +77,7 @@ function apiRoutes(app, onlineUsers) {
   /* -- USER ROUTES -- */
   /* ----------------- */
   app.post('/api/users', async (req, res) => {
-    console.log("[API Call] Adding new user info");
-    console.log(req.body);
+    console.log("[API Call] Adding new user info", req.body);
     // check if email is already in DB
     let check = await db.users.findOne({ email: req.body.email });
     if (check) res.send({ error:"Email already exists", emailAlreadyExists:true });
@@ -172,14 +154,12 @@ function apiRoutes(app, onlineUsers) {
       const newID = uuidv4();
       onlineUsers[newID] = user;
       res.send({ success:"Successfully logged in", sessionId:newID });
-      console.log(onlineUsers);
     }
   })
 
   app.get('/api/logout/:id', (req,res) => {
     console.log("[API Call] Logout request from", req.params.id);
     delete onlineUsers[req.params.id];
-    console.log(onlineUsers);
     res.send({ success:"Successfully logged out"});
   })
 }
