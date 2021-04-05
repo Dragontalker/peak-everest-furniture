@@ -8,6 +8,7 @@
     "start": "node server.js",
     "watch": "nodemon server.js",
     "seedProduct": "node seed/seedProducts.js",
+    "seedUser": "node seed/seedUsers.js",
     "client": "cd client && npm start",
     "dev": "concurrently -n 'server,client' -c 'red,green' \"nodemon server.js\" \"npm run client\""
   },
