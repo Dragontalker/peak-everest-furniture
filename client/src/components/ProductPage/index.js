@@ -16,7 +16,6 @@ function ProductPage() {
   async function init() {
     const url = `/api/products/${id}`
     const data = await fetch(url).then(r => r.json())
-    console.log(data)
     setProduct(data)
 
     const otherProductsUrl = '/api/products'
@@ -35,6 +34,28 @@ function ProductPage() {
         shuffled[i] = temp;
     }
     return shuffled.slice(0, 4);
+  }
+
+  async function handleCheckout() {
+    let sessionId = localStorage.getItem("sessionId");
+    if (sessionId) {
+      // make new entry in cart
+      await fetch(`/api/users/${sessionId}`, {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          productId:id, 
+          heading:product.heading, 
+          price:product.price, 
+          status:"BUYING" 
+        })
+      });
+    }
+    else {
+      // goto login screen
+      window.location.replace("/login");
+    }
+    
   }
 
   return (
@@ -63,7 +84,7 @@ function ProductPage() {
                   <div key={idx} className="col-3 col-sm-3 col-md-3 col-lg-3">
                     <div className="card cardBackground">
                       <div className="shop-card-img">
-                        <Link to={"/product/"+product.id} className="stretched-link">
+                        <Link to={"/product/"+product._id} className="stretched-link">
                         <img src={product.image[0]} className="card-img-top img-fluid" alt={product.heading} />
                         </Link>
                       </div>
@@ -71,7 +92,7 @@ function ProductPage() {
                   </div>
                 )}
               </div>
-              <button className="btn btn-dark product-button">Add to Cart</button>
+              <button className="btn btn-dark product-button" onClick={handleCheckout}>Add to Cart</button>
             </div>
           </div>
         </div>
@@ -80,11 +101,11 @@ function ProductPage() {
       <h1>Ratings and Reviews</h1>
       {product.reviews && product.reviews.map(review =>
         <div>
-          <div class="card border-light mb-3">
-          <div class="card-header">{review.name}</div>
-          <div class="card-body">
-            <h5 class="card-title">Rating: {review.rating}/5</h5>
-            <p class="card-text">{review.review}</p>
+          <div className="card border-light mb-3">
+          <div className="card-header">{review.name}</div>
+          <div className="card-body">
+            <h5 className="card-title">Rating: {review.rating}/5</h5>
+            <p className="card-text">{review.review}</p>
           </div>
         </div>
         </div>

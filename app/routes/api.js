@@ -1,8 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const db = require("../db/models");
 
-const testTrans = require("../db/transactionsSeed.json");
-
 function apiRoutes(app, onlineUsers) {
   /* -------------------- */
   /* -- PRODUCT ROUTES -- */
@@ -58,32 +56,28 @@ function apiRoutes(app, onlineUsers) {
   /* ------------------------ */
   /* -- TRANSACTION ROUTES -- */
   /* ------------------------ */
-  app.get("/api/transactions", (req,res) => {
+  app.get("/api/transactions", async (req,res) => {
     console.log("[API Call] Fetching all transactions info");
     console.log("Checking credentials:", req.headers.sessionid);
     const checkUser = {...onlineUsers[req.headers.sessionid]}._doc;
-    if (checkUser.isAdmin) res.send(testTrans);
+    if (checkUser.isAdmin) {
+      const data = await db.transactions.find({});
+      res.send(data);
+    }
     // if session does not have admin access
     else res.send({error:"Access denied"});
   })
 
-  app.post("/api/transactions", (req,res) => {
-    console.log("[API Call] Adding new transaction");
-    console.log("Adding transaction:", req.body);
-    res.send({ success:"New transaction added" });
-  })
-
-  app.put("/api/transactions/:id", (req,res) => {
+  app.put("/api/transactions/:id", async (req,res) => {
     console.log("[API Call] Edit existing transaction", req.params.id);
-    console.log("New transaction info", req.body);
+    await db.transactions.updateOne({_id:req.params.id}, req.body);
     res.send({ success:"Transaction successfully edited" });
   })
   /* ----------------- */
   /* -- USER ROUTES -- */
   /* ----------------- */
   app.post('/api/users', async (req, res) => {
-    console.log("[API Call] Adding new user info");
-    console.log(req.body);
+    console.log("[API Call] Adding new user info", req.body);
     // check if email is already in DB
     let check = await db.users.findOne({ email: req.body.email });
     if (check) res.send({ error:"Email already exists", emailAlreadyExists:true });
@@ -97,6 +91,52 @@ function apiRoutes(app, onlineUsers) {
     console.log("[API Call] Getting user info for session", req.params.id);
     const data = onlineUsers[req.params.id];
     if (data) res.send(data);
+    else res.send({ error:"Session not found" });
+  })
+
+  app.put('/api/users/:id', async (req,res) => {
+    console.log("[API Call] Updating cart for session", req.params.id);
+    const user = onlineUsers[req.params.id];
+    if (user) {
+      if (req.body.status === "BUYING") {
+        console.log("Add product to cart", req.body);
+        // add one product to cart
+        const newItem = { 
+          productId: req.body.productId,
+          heading: req.body.heading,
+          price: req.body.price
+        };
+        await db.users.updateOne({_id:user._id}, { $push: {cart:newItem} });
+        // replace user info in onlineUsers with updated version
+        onlineUsers[req.params.id] = await db.users.findOne({_id:user._id});
+      }
+      if (req.body.status === "CANCEL") {
+        console.log("Remove one product from cart", req.body);
+        // create new cart with item removed
+        const newCart = user.cart.filter(item => item._id != req.body.cartId );
+        await db.users.updateOne({_id:user._id}, { cart:newCart });
+        // replace user info in onlineUsers with updated version
+        onlineUsers[req.params.id] = await db.users.findOne({_id:user._id});
+      }
+      if (req.body.status === "CHECKOUT") {
+        console.log("Remove all products from cart", req.body);
+        // make new transaction entries for each product
+        const newTrans = user.cart.map(item => {
+          return {
+            userId: user._id,
+            productId: item.productId,
+            productName: item.heading,
+            status: "BOUGHT"
+          }
+        })
+        await db.transactions.insertMany(newTrans);
+        // remove all products from cart
+        await db.users.updateOne({_id:user._id}, { cart:[] });
+        // replace user info in onlineUsers with updated version
+        onlineUsers[req.params.id] = await db.users.findOne({_id:user._id});
+      }
+      res.send({ success:"Successfully updated cart" });
+    }
     else res.send({ error:"Session not found" });
   })
 
@@ -114,14 +154,12 @@ function apiRoutes(app, onlineUsers) {
       const newID = uuidv4();
       onlineUsers[newID] = user;
       res.send({ success:"Successfully logged in", sessionId:newID });
-      console.log(onlineUsers);
     }
   })
 
   app.get('/api/logout/:id', (req,res) => {
     console.log("[API Call] Logout request from", req.params.id);
     delete onlineUsers[req.params.id];
-    console.log(onlineUsers);
     res.send({ success:"Successfully logged out"});
   })
 }

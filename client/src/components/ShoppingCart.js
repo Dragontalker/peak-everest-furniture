@@ -11,7 +11,7 @@ function ShoppingCart() {
 
   useEffect(() => {
     if (store.openShopCart) {
-      refreshData();
+      refreshCart();
       setVisible(true);
     }
     else if (visible && !store.openShopCart) {
@@ -24,30 +24,35 @@ function ShoppingCart() {
     // eslint-disable-next-line
   }, [store.openShopCart])
 
-  async function refreshData() {
-    // fetch cartData using userid
-    console.log("fetching cart data");
-    setCartData([
-      {id:"123a", productid:"1203-2343", price:10.95, heading:"Bosch Refrigerator", transactionid:"111"},
-      {id:"321b", productid:"1203-2344", price:12.45, heading:"Graco SnugRide", transactionid:"222"}
-    ]);
+  async function refreshCart() {
+    // refresh cart data
+    let sessionId = localStorage.getItem("sessionId");
+    const user = await fetch(`/api/users/${sessionId}`).then(r => r.json());
+    setCartData(user.cart);
   }
 
   async function handleCheckout() {
     console.log("checkout all shopping cart items");
-    // SET transaction status to "BOUGHT"
-    // REMOVE entry from shopping cart
-    // FETCH new shoppingcart
-    setCartData([]);
+    let sessionId = localStorage.getItem("sessionId");
+    // REMOVE ALL ITEMS from shopping cart/make new transactions
+    const res = await fetch(`/api/users/${sessionId}`, {
+      method: "PUT",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status:"CHECKOUT" })
+    });
+    refreshCart();
+    console.log(res);
   }
 
   async function handleCancel(id) {
-    console.log("cancel shopping cart item", id);
-    // SET transaction status to "CANCELLED"
-    // REMOVE entry from shopping cart
-    // FETCH new shoppingcart
-    let newCart = cartData.filter(entry => entry.id !== id);
-    setCartData(newCart);
+    // Remove entry from shopping cart
+    let sessionId = localStorage.getItem("sessionId");
+    await fetch(`/api/users/${sessionId}`, {
+      method: "PUT",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cartId:id, status:"CANCEL" })
+    });
+    refreshCart();
   }
 
   function calculateTotal() {
@@ -66,17 +71,17 @@ function ShoppingCart() {
         <ul className="list-group">
           {cartData.length ? '' : <span className="text-muted">No items in your cart </span> }
           {cartData.map(item => 
-            <li className="list-group-item d-flex shop-cart-item" key={item.id}>
+            <li className="list-group-item d-flex shop-cart-item" key={item._id}>
               <div className="flex-fill ms-2 mt-1" style={{transform:"rotate(0)"}}>
                 <p className="card-text">
                   {item.heading.length < 23 ? item.heading : item.heading.slice(0,22) + "..."}
                 </p>
-                <Link className="stretched-link" to={"/product/"+item.productid} 
+                <Link className="stretched-link" to={"/product/"+item.productId} 
                   onClick={() => setStore({type:"toggle-shop-cart"})}>Go to product page</Link>
               </div>
               <div className="mt-auto">
                 <p className="text-end me-2">${item.price}</p>
-                <button className="btn btn-sm link-danger" onClick={() => handleCancel(item.id)}>Remove</button>
+                <button className="btn btn-sm link-danger" onClick={() => handleCancel(item._id)}>Remove</button>
               </div>
             </li>
           )}
