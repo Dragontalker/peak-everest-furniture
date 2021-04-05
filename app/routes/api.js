@@ -132,11 +132,10 @@ function apiRoutes(app, onlineUsers) {
       if (req.body.status === "CANCEL") {
         console.log("Remove one product from cart", req.body);
         // create new cart with item removed
-        const newCart = user.cart.filter(item => item._id !== req.body.cartId );
+        const newCart = user.cart.filter(item => item._id != req.body.cartId );
         await db.users.updateOne({_id:user._id}, { cart:newCart });
         // replace user info in onlineUsers with updated version
         onlineUsers[req.params.id] = await db.users.findOne({_id:user._id});
-        console.log("new cart:", onlineUsers[req.params.id].cart);
       }
       if (req.body.status === "CHECKOUT") {
         // make new transaction entries for each product
