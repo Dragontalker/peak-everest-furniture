@@ -76,6 +76,12 @@ function apiRoutes(app, onlineUsers) {
   /* ----------------- */
   /* -- USER ROUTES -- */
   /* ----------------- */
+  app.get("/api/users", async (req,res) => {
+    console.log("[API Call] Fetching all user info");
+    const data = await db.users.find({});
+    res.send(data);
+  })
+
   app.post('/api/users', async (req, res) => {
     console.log("[API Call] Adding new user info", req.body);
     // check if email is already in DB
