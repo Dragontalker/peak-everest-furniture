@@ -104,3 +104,4 @@ dist
 .tern-port
 
 /app/config/keys.js
+/seed
