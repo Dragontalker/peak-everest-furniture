@@ -1,0 +1,30 @@
+.admin-page {
+  width: inherit;
+}
+
+.admin-product-list .header {
+  display: grid;
+  grid-template-columns: auto max-content;
+}
+
+.admin-charts {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.product-info-popup {
+  position: absolute;
+  width: inherit;
+  z-index:20;
+  top:4rem;
+}
+
+.product-info-backdrop {
+  position: fixed;
+  z-index:10;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.2);
+}

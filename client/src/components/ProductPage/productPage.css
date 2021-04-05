@@ -18,3 +18,33 @@
     bottom:0;
     right:0;
 }
+
+.container-flex{
+    justify-content: space-between;
+    display: flex;
+}
+
+.margin{
+    margin:0%;
+    padding: 10px;
+}
+
+.outline{
+    width: 50%;
+    float:left
+}
+
+.textalign {
+    text-align: center;
+}
+
+.cardBackground {
+    background: none;
+    outline: none;
+    border: none;
+}
+
+.imgOther{
+    width: 100px;
+    height: auto;
+}

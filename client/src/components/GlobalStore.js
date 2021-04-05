@@ -1,15 +1,10 @@
 import { createContext, useReducer, useContext, useEffect } from "react";
-import noImg from '../assets/no-image.png';
 
 const initialData = {
   winX:window.innerWidth, 
   winY:window.innerHeight,
   loggedIn:false,
   username: "[User]",
-  shoppingCart: [
-    {id:"product id", title:"product name", picture:noImg},
-    {id:"product id2", title:"product name 2", picture:noImg}
-  ],
   openShopCart:false,
   openNavExt:false
 };
@@ -36,6 +31,22 @@ const StoreContext = createContext();
 
 const StoreProvider = function(props){
   const [state, dispatch] = useReducer( dataReducer, initialData );
+  // when a new session launches
+  useEffect(() => {
+    // check if user already logged in before
+    handleOldSession();
+  }, [])
+
+  async function handleOldSession() {
+    const oldSession = localStorage.getItem("sessionId");
+    const res = await fetch(`/api/users/${oldSession}`).then(r => r.json());
+    if (res.error) {
+      console.log(res.error);
+      localStorage.removeItem("sessionId");
+    }
+    else dispatch({type:"login"});
+  }
+
   useEffect(() => {
     // add listeners for window resize
     function handleResize() { dispatch({type:"resize"}) };

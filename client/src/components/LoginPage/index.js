@@ -5,16 +5,27 @@ import './login.css';
 function LoginPage() {
 
   const [, setStore] = useStoreContext();
-  const [showErr, setShowErr] = useState(false);
+  const [err, setErr] = useState("");
 
   const email = useRef(null);
   const pw = useRef(null);
 
-  function submitForm(e) {
+  async function submitForm(e) {
     e.preventDefault();
-    console.log(`trying to login with email: ${email.current.value} & password: ${pw.current.value}`);
-    setShowErr(true);
-    setStore({type:"login"});
+    setErr('');
+    console.log(`trying to login`);
+    let res = await fetch("/api/login", {
+      method: "POST",
+      body: JSON.stringify({ email:email.current.value, password:pw.current.value }),
+      headers: {"Content-Type": "application/json"}
+    }).then(r => r.json());
+    if (res.error) setErr(res.error);
+    else {
+      console.log(res);
+      localStorage.setItem("sessionId", res.sessionId);
+      setStore({type:"login"});
+      window.location.replace("/");
+    }
   }
 
   return(
@@ -29,7 +40,7 @@ function LoginPage() {
           <div className="mb-3">
             <label htmlFor="passwordInput" className="form-label">Password</label>
             <input type="password" className="form-control" ref={pw} id="passwordInput" placeholder="********" />
-            {showErr ? <span className="login-err">Error: account not found</span> : ""}
+            {err.length>0 ? <span className="login-err">Error: {err}</span> : ""}
           </div>
           <div className="text-center mb-3">
             <button className="btn btn-dark">Login</button>

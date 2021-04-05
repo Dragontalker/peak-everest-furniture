@@ -5,8 +5,11 @@ function Navbar() {
 
   const [store, updateStore] = useStoreContext();
 
-  function handleLogout() {
+  async function handleLogout() {
     if (store.openShopCart) updateStore({type:"toggle-shop-cart"});
+    const sessionId = localStorage.getItem("sessionId");
+    localStorage.removeItem("sessionId");
+    await fetch(`/api/logout/${sessionId}`);
     updateStore({type:"logout"});
   }
 
