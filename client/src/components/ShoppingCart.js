@@ -11,7 +11,7 @@ function ShoppingCart() {
 
   useEffect(() => {
     if (store.openShopCart) {
-      refreshData();
+      refreshCart();
       setVisible(true);
     }
     else if (visible && !store.openShopCart) {
@@ -24,40 +24,35 @@ function ShoppingCart() {
     // eslint-disable-next-line
   }, [store.openShopCart])
 
-  async function refreshData() {
-    // fetch cartData using userid
-    console.log("fetching cart data");
-    setCartData([
-      {_id:"123a", productId:"1203-2343", price:10.95, heading:"Bosch Refrigerator"},
-      {_id:"321b", productId:"1203-2344", price:12.45, heading:"Graco SnugRide"}
-    ]);
+  async function refreshCart() {
+    // refresh cart data
+    let sessionId = localStorage.getItem("sessionId");
+    const user = await fetch(`/api/users/${sessionId}`).then(r => r.json());
+    setCartData(user.cart);
   }
 
   async function handleCheckout() {
     console.log("checkout all shopping cart items");
     let sessionId = localStorage.getItem("sessionId");
-    // NEW transactions for ALL items in cart (status:"BOUGHT")
-    const res = await fetch("/api/transactions", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        userSession:sessionId, 
-        status:"BUYING"
-      })
-    })
+    // REMOVE ALL ITEMS from shopping cart/make new transactions
+    const res = await fetch(`/api/users/${sessionId}`, {
+      method: "PUT",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status:"CHECKOUT" })
+    });
+    refreshCart();
     console.log(res);
-    // REMOVE entry from shopping cart
-    // FETCH new shoppingcart
-    setCartData([]);
   }
 
   async function handleCancel(id) {
-    console.log("cancel shopping cart item", id);
-    // SET transaction status to "CANCELLED"
-    // REMOVE entry from shopping cart
-    // FETCH new shoppingcart
-    let newCart = cartData.filter(entry => entry._id !== id);
-    setCartData(newCart);
+    // Remove entry from shopping cart
+    let sessionId = localStorage.getItem("sessionId");
+    await fetch(`/api/users/${sessionId}`, {
+      method: "PUT",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cartId:id, status:"CANCEL" })
+    });
+    refreshCart();
   }
 
   function calculateTotal() {

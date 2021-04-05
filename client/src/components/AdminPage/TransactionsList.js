@@ -15,7 +15,7 @@ function TransactionsList(props) {
     // update status of transaction to SOLD
     const res = await fetch(`/api/transactions/${id}`, {
       method: "PUT",
-      headers: { 'Content-Type': 'application/json', 'userid': '123' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status:"SOLD" })
     });
     console.log(res);

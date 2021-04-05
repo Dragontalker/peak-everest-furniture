@@ -73,16 +73,16 @@ function apiRoutes(app, onlineUsers) {
     // find userID from userSession
     if (onlineUsers[req.body.userSession]) {
       const userId = onlineUsers[req.body.userSession]._id;
-      await new db.transactions({
-        userId:userId, 
-        productId:req.body.productId, 
-        productName:req.body.productName, 
-        status:req.body.status
-      }).save();
-      res.send({ success:"New transaction added" });
+      // add ALL products in cart to new transaction
+      // await new db.transactions({
+      //   userId:userId, 
+      //   productId:req.body.productId, 
+      //   productName:req.body.productName, 
+      //   status:req.body.status
+      // }).save();
+      res.send({ success:"New transactions added" });
     }
     else res.send({ error:"Session not found" });
-    
   })
 
   app.put("/api/transactions/:id", async (req,res) => {
@@ -109,6 +109,45 @@ function apiRoutes(app, onlineUsers) {
     console.log("[API Call] Getting user info for session", req.params.id);
     const data = onlineUsers[req.params.id];
     if (data) res.send(data);
+    else res.send({ error:"Session not found" });
+  })
+
+  app.put('/api/users/:id', async (req,res) => {
+    console.log("[API Call] Updating cart for session", req.params.id);
+    const user = onlineUsers[req.params.id];
+    if (user) {
+      if (req.body.status === "BUYING") {
+        console.log("Add product to cart", req.body);
+        // add one product to cart
+        const newItem = { 
+          productId: req.body.productId,
+          heading: req.body.heading,
+          price: req.body.price
+        };
+        await db.users.updateOne({_id:user._id}, { $push: {cart:newItem} });
+        // replace user info in onlineUsers with updated version
+        onlineUsers[req.params.id] = await db.users.findOne({_id:user._id});
+        console.log("new cart:", onlineUsers);
+      }
+      if (req.body.status === "CANCEL") {
+        console.log("Remove one product from cart", req.body);
+        // create new cart with item removed
+        const newCart = user.cart.filter(item => item._id !== req.body.cartId );
+        await db.users.updateOne({_id:user._id}, { cart:newCart });
+        // replace user info in onlineUsers with updated version
+        onlineUsers[req.params.id] = await db.users.findOne({_id:user._id});
+        console.log("new cart:", onlineUsers[req.params.id].cart);
+      }
+      if (req.body.status === "CHECKOUT") {
+        // make new transaction entries for each product
+        console.log("Remove all products from cart", req.body);
+        // remove all products from cart
+        await db.users.updateOne({_id:user._id}, { cart:[] });
+        // replace user info in onlineUsers with updated version
+        onlineUsers[req.params.id] = await db.users.findOne({_id:user._id});
+      }
+      res.send({ success:"Successfully updated cart" });
+    }
     else res.send({ error:"Session not found" });
   })
 

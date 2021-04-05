@@ -15,7 +15,6 @@ function Navbar() {
     const sessionId = localStorage.getItem("sessionId");
     if (sessionId) {
       const res = await fetch(`/api/users/${sessionId}`).then(r => r.json());
-      console.log("Is admin check:", res);
       if (res.isAdmin) setIsAdmin(true);
     }
   }
