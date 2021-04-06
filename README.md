@@ -6,6 +6,12 @@
 
 https://peak-everest-furniture.herokuapp.com/
 
+---
+
+## Description
+
+A full E-commerce solution for small business that is built with React, Express.js, and MongoDB Atlas. This application includes features such as dynamic updating shopping cart, data base for customer information and transaction records and management dashboard for administration.
+
 ## Group Members
 
 - Chang Xiao, https://github.com/sinsinkun
