@@ -43,6 +43,7 @@ if (process.env.NODE_ENV === 'production') {
     // Set route for static files
     app.get('*', (req, res) => {
         console.log("[HTML GET]: Get React app");
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     })
 };
 
