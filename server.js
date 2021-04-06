@@ -30,7 +30,7 @@ app.use(morgan('dev'));
 require('./app/routes/api.js')(app, onlineUsers);
 
 // display all pages from react
-app.use(express.static('./client/build'));
+// app.use(express.static('./client/build'));
 app.get('*', (req, res) => {
     console.log("[HTML GET]: Get React app");
     res.sendFile('./client/build/index.html', {root:"."});
@@ -38,7 +38,8 @@ app.get('*', (req, res) => {
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
-
+    // Set static folder
+    app.use(express.static('client/build'));
 };
 
 app.listen(PORT, () => {
