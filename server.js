@@ -36,6 +36,11 @@ app.get('*', (req, res) => {
     res.sendFile('./client/build/index.html', {root:"."});
 });
 
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+
+};
+
 app.listen(PORT, () => {
     console.log(`==> 🌎  Listening on port ${PORT}. Visit http://localhost:${PORT} in your browser.`);
 });
