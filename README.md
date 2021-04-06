@@ -1,5 +1,7 @@
 # Peak Everest Furniture
 
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+
 ## Try out our web application:
 
 https://peak-everest-furniture.herokuapp.com/
