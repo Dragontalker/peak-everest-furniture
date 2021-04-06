@@ -28,6 +28,10 @@ function LoginPage() {
     }
   }
 
+  function goToRegisteration() {
+    window.location.replace("/register");
+  }
+
   return(
     <div className="card mt-3 login-body">
       <div className="card-body">
@@ -47,7 +51,7 @@ function LoginPage() {
           </div>
         </form>
         <div className="text-center mb-3">
-          <button className="btn btn-secondary">Create a new account</button>
+          <button className="btn btn-secondary" onClick={goToRegisteration}>Create a new account</button>
         </div>
       </div>
     </div>
