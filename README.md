@@ -47,17 +47,27 @@ A full E-commerce solution for small business that is built with React, Express.
 
 ---
 
-## Group Members
-
-- Chang Xiao, https://github.com/sinsinkun
-- George Huo, https://github.com/siyuanhuo
-- Michael Wong, https://github.com/Mwong228
-- Tong Yang, https://github.com/Dragontalker
-
 ## Installation
+
+To start development, please install the full stack application following three steps:
+
+1. Install back end, using the following command
 
 ```bash
 npm install
+```
+
+2. Install react client, using the followng command
+
+```bash
+cd client && npm install
+```
+
+3. Make sure MongoDB is installed logcally, then seed the test data using the following command
+
+```bash
+npm run seedProduct
+npm run seedUser
 ```
 
 ## Usage
@@ -65,3 +75,10 @@ npm install
 ```bash
 npm run dev
 ```
+
+## Group Members
+
+- Chang Xiao, https://github.com/sinsinkun
+- George Huo, https://github.com/siyuanhuo
+- Michael Wong, https://github.com/Mwong228
+- Tong Yang, https://github.com/Dragontalker
