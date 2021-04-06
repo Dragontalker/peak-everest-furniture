@@ -72,9 +72,16 @@ npm run seedUser
 
 ## Usage
 
+Once the installtion is completed, type the following command in console:
+
 ```bash
 npm run dev
 ```
+
+There should be connection confirmation message for Express server and MongoDB data base.
+
+- The Express.js server is running on http://localhost:8080.
+- The React.js client is running on http://localhost:3000.
 
 ## Group Members
 
