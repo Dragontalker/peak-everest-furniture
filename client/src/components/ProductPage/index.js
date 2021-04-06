@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router"
 import './productPage.css'
-import { Link } from "react-router-dom";
 
 function ProductPage() {
   const { id } = useParams();
@@ -14,15 +13,16 @@ function ProductPage() {
   }, [])
 
   async function init() {
-    const url = `/api/products/${id}`
-    const data = await fetch(url).then(r => r.json())
-    setProduct(data)
+    const data = await fetch(`/api/products/${id}`).then(r => r.json());
+    setProduct(data);
 
-    const otherProductsUrl = '/api/products'
-    const otherProductsData = await fetch(otherProductsUrl).then(r=> r.json())
-    const randomProducts = getRandomProducts(otherProductsData)
-    console.log(otherProductsData)
-    setOtherProducts(randomProducts)
+    const otherProductsData = await fetch('/api/products').then(r=> r.json());
+    const randomProducts = getRandomProducts(otherProductsData);
+    setOtherProducts(randomProducts);
+  }
+
+  function linkOtherProduct(id) {
+    window.location.replace("/product/"+id);
   }
 
   function getRandomProducts(arr){
@@ -55,7 +55,6 @@ function ProductPage() {
       // goto login screen
       window.location.replace("/login");
     }
-    
   }
 
   return (
@@ -83,11 +82,9 @@ function ProductPage() {
                 {otherProducts && otherProducts.map((product, idx) => 
                   <div key={idx} className="col-3 col-sm-3 col-md-3 col-lg-3">
                     <div className="card cardBackground">
-                      <div className="shop-card-img">
-                        <Link to={"/product/"+product._id} className="stretched-link">
-                        <img src={product.image[0]} className="card-img-top img-fluid" alt={product.heading} />
-                        </Link>
-                      </div>
+                      <button onClick={() => linkOtherProduct(product._id)} className="btn stretched-link">
+                      <img src={product.image[0]} className="card-img-top img-fluid" alt={product.heading} />
+                      </button>
                     </div>
                   </div>
                 )}
